@@ -318,12 +318,14 @@ body.banner-shown {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1rem;
-  line-height: 1.1;
+  line-height: 1.15;
   color: var(--green-900);
+  min-width: 0;
+}
+/* 'Malpensa 1' wraps to its own line on mobile, stays inline on desktop */
+.brand-name-line {
+  display: block;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
 }
 .brand-sub {
   display: none;
@@ -336,8 +338,9 @@ body.banner-shown {
   white-space: nowrap;
 }
 @media (min-width: 640px) {
+  .brand-name-line { display: inline; }
   .brand-sub { display: block; }
-  .brand-name { font-size: 1.05rem; }
+  .brand-name { font-size: 1.05rem; white-space: nowrap; }
 }
 .nav {
   display: flex;
@@ -392,6 +395,44 @@ body.banner-shown {
 }
 .cta-long { display: inline; }
 .cta-short { display: none; }
+@media (max-width: 480px) {
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+  .brand-name {
+    font-size: 0.95rem;
+  }
+  .header-cta {
+    padding-inline: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .header-cta svg {
+    width: 14px;
+    height: 14px;
+  }
+  .header-actions {
+    gap: 0.35rem;
+  }
+}
+@media (max-width: 360px) {
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+  }
+  .brand-name {
+    font-size: 0.85rem;
+  }
+  .header-cta {
+    padding-inline: 0.65rem;
+    font-size: 0.88rem;
+  }
+}
+@media (max-width: 330px) {
+  .brand-name {
+    font-size: 0.78rem;
+  }
+}
 @media (max-width: 400px) {
   .cta-long { display: none; }
   .cta-short { display: inline; }
