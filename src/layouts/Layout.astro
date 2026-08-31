@@ -171,6 +171,10 @@ const htmlLang = I18N[lang].langLabel;
           }
           window.addEventListener('scroll', syncBanner, { passive: true });
           window.addEventListener('resize', syncBanner);
+          window.addEventListener('load', syncBanner);
+          // Re-measure once fonts are decoded (fallback->webfont can change
+          // how many lines the text wraps to).
+          setTimeout(syncBanner, 400);
           syncBanner();
           bannerClose.addEventListener('click', function () {
             bannerClosed = true;
