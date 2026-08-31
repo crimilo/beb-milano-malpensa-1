@@ -314,8 +314,14 @@ strong { font-weight: 600; }
   background: var(--green-700);
   border-radius: 2px;
 }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
 .header-cta {
-  margin-left: 0.25rem;
   flex: 0 0 auto;
   padding-inline: 1.1rem;
 }
@@ -372,7 +378,6 @@ strong { font-weight: 600; }
   .nav.is-open { display: flex; }
   .nav-link { padding: 0.8rem 1rem; font-size: 1.05rem; }
   .nav-toggle { display: block; }
-  .header-cta { margin-left: 0; }
 }
 
 /* ---------- hero ---------- */
