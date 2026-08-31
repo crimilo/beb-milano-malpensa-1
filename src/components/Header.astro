@@ -16,7 +16,12 @@ const isActive = (href: string) =>
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href={PAGES.home[lang]} aria-label={t.brandAria}>
+    <a
+      class="brand"
+      href={PAGES.home[lang]}
+      aria-label={t.brandAria}
+      aria-current={path === PAGES.home[lang] ? 'page' : undefined}
+    >
       <Logo />
       <span class="brand-name">
         B&amp;B Milano <span class="brand-name-line">Malpensa 1</span>

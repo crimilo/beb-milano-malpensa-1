@@ -49,7 +49,6 @@ export const I18N = {
     cta: 'Chiama ora',
     ctaShort: 'Chiama',
     nav: [
-      { href: PAGES.home.it, label: 'Home' },
       { href: PAGES.lavoro.it, label: 'Per lavoro' },
       { href: PAGES.malpensa.it, label: 'Vicino a Malpensa' },
       { href: PAGES.castano.it, label: 'Castano Primo' },
@@ -79,7 +78,6 @@ export const I18N = {
     cta: 'Call now',
     ctaShort: 'Call',
     nav: [
-      { href: PAGES.home.en, label: 'Home' },
       { href: PAGES.lavoro.en, label: 'Business stays' },
       { href: PAGES.malpensa.en, label: 'Near Malpensa' },
       { href: PAGES.castano.en, label: 'Castano Primo' },

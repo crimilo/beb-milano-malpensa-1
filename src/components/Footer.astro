@@ -23,6 +23,7 @@ const t = I18N[lang];
       <div class="footer-col">
         <p class="footer-title">{t.footer.sitemapTitle}</p>
         <ul>
+          <li><a href={PAGES.home[lang]}>Home</a></li>
           {t.nav.map((item) => (
             <li><a href={item.href}>{item.label}</a></li>
           ))}
