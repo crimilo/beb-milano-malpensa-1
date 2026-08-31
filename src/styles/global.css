@@ -239,7 +239,7 @@ body.banner-shown {
   padding: 0.4rem 3.25rem;
   background: var(--green-900);
   color: var(--cream);
-  font-size: clamp(0.78rem, 2.6vw, 0.95rem);
+  font-size: clamp(0.88rem, 3.2vw, 1.1rem);
   line-height: 1.35;
   text-align: center;
   border-bottom: 1px solid var(--line-soft);
