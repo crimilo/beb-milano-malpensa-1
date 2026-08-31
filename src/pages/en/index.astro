@@ -1,0 +1,160 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Gallery from '../../components/Gallery.astro';
+import Reviews from '../../components/Reviews.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, PHOTO, PRICES, PAGES } from '../../data/site';
+import { lodgingSchema, websiteSchema, breadcrumbSchema } from '../../data/schema';
+
+const lang = 'en' as const;
+const title = 'B&B Milano Malpensa 1 \u00b7 Castano Primo, near Milan';
+const description =
+  'Affordable B&B in Castano Primo, 15 km from Malpensa and 1h by train from Milan: rooms from \u20ac45, private bathroom, Wi-Fi, parking. Call 339 294 6283.';
+const schema = [
+  lodgingSchema(lang),
+  websiteSchema(lang),
+  breadcrumbSchema(lang, [{ name: 'Home', key: 'home' }]),
+].join(',');
+---
+<Layout lang={lang} pageKey="home" title={title} description={description} schema={`[${schema}]`}>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.struttura.src} alt={PHOTO.struttura.alt} width={PHOTO.struttura.w} height={PHOTO.struttura.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Welcome to B&amp;B Milano Malpensa 1</span>
+      <h1>B&amp;B in Castano Primo, between Malpensa and Milan</h1>
+      <p class="lead">
+        Rooms with private bathroom, Wi-Fi, parking and airport shuttle: the
+        comfortable, affordable base for business travellers between Milan and
+        Malpensa. Breakfast included, prices always visible.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Call now: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href={PAGES.lavoro.en}>For business travel</a>
+        <a class="btn btn--ghost" href={PAGES.camere.en}>Rooms &amp; prices</a>
+      </div>
+      <div class="hero-meta">
+        <span><strong>15 km</strong> from the airport</span>
+        <span><strong>5 min</strong> walk to the train to Milan</span>
+        <span><strong>from &euro;45</strong> a night, breakfast included</span>
+        <span><strong>176</strong> Google reviews</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why us -->
+  <section class="section" aria-labelledby="perche-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why choose us</span>
+        <h2 id="perche-title">A B&amp;B designed for work and travel</h2>
+        <p class="lead">
+          In Castano Primo, in the heart of the Alto Milanese area: convenient
+          for local businesses, Milan and Malpensa airport.
+        </p>
+      </div>
+      <div class="grid grid--2">
+        <a class="card" href={PAGES.lavoro.en}>
+          <span class="card-ico"><Icon name="car" size={26} /></span>
+          <h3>Business stays</h3>
+          <p>
+            Weekly stays, fast Wi-Fi, early breakfast and parking: the right
+            choice for technicians, commuters and companies.
+          </p>
+        </a>
+        <a class="card" href={PAGES.malpensa.en}>
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Malpensa shuttle</h3>
+          <p>
+            Airport pick-up and drop-off on request: perfect for early flights,
+            stopovers and late arrivals.
+          </p>
+        </a>
+        <a class="card" href={PAGES.castano.en}>
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>Milan by train</h3>
+          <p>
+            Castano Primo station is a 5-minute walk away: Milan Cadorna in
+            about one hour, no car, no stress.
+          </p>
+        </a>
+        <a class="card" href={PAGES.camere.en}>
+          <span class="card-ico"><Icon name="home" size={26} /></span>
+          <h3>Clear, visible prices</h3>
+          <p>
+            From &euro;45 a night with breakfast included: rooms with private
+            bathroom, TV and air conditioning, no surprises.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms + prices preview -->
+  <section class="section section--tint" aria-labelledby="camere-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Rooms and prices</span>
+        <h2 id="camere-title">Simple, clean rooms at the right price</h2>
+        <p class="lead">
+          Every room has a private bathroom, TV, free Wi-Fi and air
+          conditioning. Indicative nightly rates, breakfast included.
+        </p>
+      </div>
+      <Gallery
+        photos={[PHOTO.lettoMatrimoniale, PHOTO.castelloSingolo, PHOTO.quattroLetti, PHOTO.bagno5]}
+        eagerFirst
+      />
+      <div class="facts" style="margin-top: var(--space-3)">
+        <div class="fact"><strong>{PRICES.single.en}</strong><span>single room</span></div>
+        <div class="fact"><strong>{PRICES.double.en}</strong><span>double room</span></div>
+        <div class="fact"><strong>{PRICES.triple.en}</strong><span>triple room</span></div>
+        <div class="fact"><strong>{PRICES.family.en}</strong><span>family room</span></div>
+      </div>
+      <p class="price-note" style="margin-top: var(--space-2)">{PRICES.note.en}</p>
+      <p style="margin-top: var(--space-3)">
+        <a class="btn btn--line" href={PAGES.camere.en}>See all rooms and prices</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- The area -->
+  <section class="section" aria-labelledby="zona-title">
+    <div class="container">
+      <div class="split">
+        <figure class="photo photo--wide">
+          <img src={PHOTO.piazza.src} alt={PHOTO.piazza.alt} width={PHOTO.piazza.w} height={PHOTO.piazza.h} loading="lazy" decoding="async" data-lightbox />
+        </figure>
+        <div>
+          <span class="eyebrow">Our area</span>
+          <h2 id="zona-title">Between Milan, Malpensa and the Alto Milanese business area</h2>
+          <p>
+            Castano Primo is the strategic spot for people working between
+            Milan and Malpensa airport: 15 km from the terminals, with the
+            station for Milan Cadorna nearby and the main motorways (A8, A4)
+            close by. After work, the quiet of a town on the Ticino river.
+          </p>
+          <ul class="checklist">
+            <li><Icon name="check" /> Malpensa airport shuttle on request</li>
+            <li><Icon name="check" /> Castano Primo station a 5-minute walk away</li>
+            <li><Icon name="check" /> Wi-Fi, parking and flexible check-in</li>
+            <li><Icon name="check" /> Weekly rates for people working in the area</li>
+          </ul>
+          <p style="margin-top: var(--space-3)">
+            <a class="btn btn--line" href={PAGES.contatti.en}>How to get here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Reviews lang={lang} />
+  <CtaBand
+    title="Looking for a place for work or before a flight?"
+    text="Call us or write on WhatsApp: we'll confirm availability, the exact price and the shuttle service in a few minutes."
+  />
+</Layout>

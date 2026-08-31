@@ -1,0 +1,194 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Gallery from '../components/Gallery.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PHOTO, PRICES, PAGES } from '../data/site';
+import { lodgingSchema, breadcrumbSchema, faqSchema } from '../data/schema';
+
+const lang = 'it' as const;
+const title = 'B&B per lavoro a Milano e Malpensa \u00b7 Castano Primo';
+const description =
+  'Alloggio per lavoro a Castano Primo (MI): camere da \u20ac45 con Wi-Fi e parcheggio, navetta Malpensa e Milano in treno in 1h. Chiama 339 294 6283.';
+const faqs = [
+  {
+    q: 'Fate sconti per soggiorni lunghi o settimanali?',
+    a: 'S\u00ec: per chi lavora in zona offriamo tariffe agevolate per soggiorni settimanali e mensili. Chiama il 339 294 6283 per un preventivo personalizzato.',
+  },
+  {
+    q: 'Come raggiungo Milano per lavoro dal B&B?',
+    a: 'La stazione di Castano Primo \u00e8 a 5 minuti a piedi: con la linea Saronno\u2013Novara arrivi a Milano Cadorna in circa un\u2019ora, senza auto.',
+  },
+  {
+    q: 'Posso fare check-in in tarda serata dopo il lavoro?',
+    a: 'Certo: il check-in \u00e8 flessibile e concordato in anticipo, proprio per chi arriva tardi la sera o riparte all\u2019alba.',
+  },
+];
+const schema = [
+  lodgingSchema(lang),
+  breadcrumbSchema(lang, [
+    { name: 'Home', key: 'home' },
+    { name: 'B&B per lavoro', key: 'lavoro' },
+  ]),
+  faqSchema(lang, faqs),
+].join(',');
+---
+<Layout
+  lang={lang}
+  pageKey="lavoro"
+  title={title}
+  description={description}
+  path="/beb-per-lavoro/"
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.salotto.src} alt={PHOTO.salotto.alt} width={PHOTO.salotto.w} height={PHOTO.salotto.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Trasferte, pendolari, aziende</span>
+      <h1>B&amp;B per lavoro: la base tra Milano e Malpensa</h1>
+      <p class="lead">
+        Camera tranquilla, Wi-Fi gratuito, parcheggio e colazione: a Castano
+        Primo trovi tutto quello che serve per lavorare e riposare, con Milano
+        a un&rsquo;ora di treno e l&rsquo;aeroporto a 15 km.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Chiama ora: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href={PAGES.camere.it}>Camere e prezzi</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs
+      items={[{ name: 'B&B per lavoro', href: PAGES.lavoro.it }]}
+    />
+  </div>
+
+  <!-- Why business -->
+  <section class="section" aria-labelledby="perche-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Per chi lavora</span>
+        <h2 id="perche-title">Perch&eacute; scegliere il nostro B&amp;B per il lavoro</h2>
+        <p class="lead">
+          Non un hotel anonimo: una base familiare, comoda e dal prezzo
+          onesto, pensata per chi viaggia per lavoro.
+        </p>
+      </div>
+      <ul class="checklist">
+        <li><Icon name="check" /> <span><strong>Wi-Fi gratuito</strong> e camera tranquilla per lavorare e riposare.</span></li>
+        <li><Icon name="check" /> <span><strong>Parcheggio in struttura</strong>, ideale se arrivi in auto da fuori Milano.</span></li>
+        <li><Icon name="check" /> <span><strong>Milano in treno in circa un&rsquo;ora</strong>: stazione a 5 minuti a piedi.</span></li>
+        <li><Icon name="check" /> <span><strong>Navetta per Malpensa</strong> su richiesta, per voli di lavoro.</span></li>
+        <li><Icon name="check" /> <span><strong>Check-in flessibile</strong>, anche in tarda serata o all&rsquo;alba.</span></li>
+        <li><Icon name="check" /> <span><strong>Tariffe agevolate</strong> per soggiorni settimanali e mensili.</span></li>
+      </ul>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.single.it}</strong><span>camera singola</span></div>
+        <div class="fact"><strong>{PRICES.double.it}</strong><span>doppia / matrimoniale</span></div>
+        <div class="fact"><strong>~1h</strong><span>in treno per Milano</span></div>
+        <div class="fact"><strong>15 km</strong><span>da Malpensa T1/T2</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="section section--tint" aria-labelledby="per-chi-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Per chi &egrave;</span>
+        <h2 id="per-chi-title">Chi sceglie il B&amp;B per lavoro</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <span class="card-ico"><Icon name="car" size={26} /></span>
+          <h3>Tecnici e installatori</h3>
+          <p>
+            Chi segue cantieri e impianti nell&rsquo;Alto Milanese (Busto
+            Arsizio, Gallarate, Legnano): parcheggio e colazione presto.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>Pendolari e consulenti</h3>
+          <p>
+            Chi ha riunioni a Milano: in treno dalla stazione di Castano Primo,
+            con ritorni serali senza pensieri.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Chi vola per lavoro</h3>
+          <p>
+            Partenze e arrivi da Malpensa con navetta su richiesta, anche in
+            orari scomodi, a un prezzo da B&amp;B.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rates -->
+  <section class="section" aria-labelledby="tariffe-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Le tariffe</span>
+        <h2 id="tariffe-title">Prezzi chiari, sempre visibili</h2>
+        <p class="lead">{PRICES.note.it}</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.single.it}</strong><span>singola</span></div>
+        <div class="fact"><strong>{PRICES.double.it}</strong><span>matrimoniale</span></div>
+        <div class="fact"><strong>{PRICES.twin.it}</strong><span>doppia letti singoli</span></div>
+        <div class="fact"><strong>{PRICES.triple.it}</strong><span>tripla</span></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.family.it}</strong><span>quadrupla famiglia</span></div>
+        <div class="fact"><strong>{PRICES.group.it}</strong><span>letto a castello</span></div>
+        <div class="fact"><strong>7+ notti</strong><span>{PRICES.weekly.it}</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms -->
+  <section class="section section--tint" aria-labelledby="camere-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="camere-title">Le camere per il tuo soggiorno di lavoro</h2>
+      </div>
+      <Gallery
+        photos={[PHOTO.lettoMatrimoniale3, PHOTO.lettoSingoli, PHOTO.tv, PHOTO.bagno9]}
+        eagerFirst
+      />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Domande frequenti</span>
+        <h2 id="faq-title">Le risposte che servono prima di prenotare</h2>
+      </div>
+      <div class="faq">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Ti serve un alloggio per lavoro?"
+    text="Chiamaci: ti proponiamo la tariffa giusta per la tua trasferta, anche per soggiorni lunghi."
+  />
+</Layout>

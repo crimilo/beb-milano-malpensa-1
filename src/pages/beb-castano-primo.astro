@@ -4,24 +4,26 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Gallery from '../components/Gallery.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, PHOTO } from '../data/site';
+import { SITE, PHOTO, PAGES } from '../data/site';
 import { lodgingSchema, breadcrumbSchema } from '../data/schema';
 
+const lang = 'it' as const;
 const title = 'B&B a Castano Primo, in provincia di Milano';
 const description =
-  'B&B a Castano Primo (MI), sul fiume Ticino e a 15 km da Malpensa: stazione a 5 min a piedi, navetta aeroporto, parcheggio. Chiama 339 294 6283.';
+  'B&B a Castano Primo (MI), a 15 km da Malpensa: stazione per Milano a 5 min a piedi, navetta aeroporto, parcheggio. Camere da \u20ac45. Chiama 339 294 6283.';
 const schema = [
-  lodgingSchema(),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'B&B a Castano Primo', path: '/beb-castano-primo/' },
+  lodgingSchema(lang),
+  breadcrumbSchema(lang, [
+    { name: 'Home', key: 'home' },
+    { name: 'B&B a Castano Primo', key: 'castano' },
   ]),
 ].join(',');
 ---
 <Layout
+  lang={lang}
+  pageKey="castano"
   title={title}
   description={description}
-  path="/beb-castano-primo/"
   schema={`[${schema}]`}
 >
   <!-- Hero -->
@@ -33,20 +35,20 @@ const schema = [
       <span class="hero-kicker">Nel cuore dell&rsquo;Alto Milanese</span>
       <h1>B&amp;B a Castano Primo, in provincia di Milano</h1>
       <p class="lead">
-        Il nostro bed &amp; breakfast si trova a Castano Primo, lungo il fiume
-        Ticino e a due passi dalla stazione: il punto di partenza giusto per
-        Malpensa, Milano e il Parco del Ticino.
+        Il nostro bed &amp; breakfast si trova a Castano Primo, a due passi
+        dalla stazione per Milano e a 15 km da Malpensa: la base giusta per
+        lavoro, studio e viaggi.
       </p>
       <div class="btn-row">
         <a class="btn btn--accent" href={SITE.phoneHref}>Chiama ora: {SITE.phoneDisplay}</a>
-        <a class="btn btn--ghost" href="/contatti/">Come raggiungerci</a>
+        <a class="btn btn--ghost" href={PAGES.contatti.it}>Come raggiungerci</a>
       </div>
     </div>
   </section>
 
   <div class="container section">
     <Breadcrumbs
-      items={[{ name: 'B&B a Castano Primo', href: '/beb-castano-primo/' }]}
+      items={[{ name: 'B&B a Castano Primo', href: PAGES.castano.it }]}
     />
   </div>
 
@@ -74,8 +76,8 @@ const schema = [
           <ul class="checklist">
             <li><Icon name="check" /> Stazione ferroviaria a 5 minuti a piedi</li>
             <li><Icon name="check" /> Conad, bar e ristoranti raggiungibili a piedi</li>
-            <li><Icon name="check" /> Fiume Ticino e aree verdi a due passi</li>
             <li><Icon name="check" /> A 15 km da Malpensa, a ~30 km da Milano</li>
+            <li><Icon name="check" /> Vicino alle aree industriali di Busto Arsizio, Gallarate e Legnano</li>
           </ul>
         </div>
         <figure class="photo photo--portrait">
@@ -85,7 +87,7 @@ const schema = [
     </div>
   </section>
 
-  <!-- Who is it for -->
+  <!-- Who it is for -->
   <section class="section section--tint" aria-labelledby="per-chi-title">
     <div class="container">
       <div class="section-head">
@@ -94,27 +96,27 @@ const schema = [
       </div>
       <div class="grid grid--3">
         <div class="card">
-          <span class="card-ico"><Icon name="plane" size={26} /></span>
-          <h3>Viaggiatori in partenza</h3>
+          <span class="card-ico"><Icon name="car" size={26} /></span>
+          <h3>Chi lavora in zona</h3>
           <p>
-            Chi deve volare da Malpensa e cerca una notte comoda ed economica,
-            con navetta e parcheggio.
+            Professionisti e tecnici delle aziende dell&rsquo;Alto Milanese:
+            parcheggio, Wi-Fi e tariffe per soggiorni lunghi.
           </p>
         </div>
         <div class="card">
           <span class="card-ico"><Icon name="train" size={26} /></span>
-          <h3>Chi lavora in zona</h3>
+          <h3>Pendolari verso Milano</h3>
           <p>
-            Professionisti e pendolari che raggiungono Milano in treno o gli
-            stabilimenti dell&rsquo;Alto Milanese.
+            Chi deve raggiungere Milano per lavoro o studio: in treno dalla
+            stazione di Castano Primo, a 5 minuti a piedi.
           </p>
         </div>
         <div class="card">
-          <span class="card-ico"><Icon name="bike" size={26} /></span>
-          <h3>Famiglie e ciclisti</h3>
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Viaggiatori in partenza</h3>
           <p>
-            Weekend nella natura del Ticino, escursioni lungo il Canale
-            Villoresi e camere spaziose per tutta la famiglia.
+            Chi vola da Malpensa e cerca una notte comoda ed economica, con
+            navetta e parcheggio in struttura.
           </p>
         </div>
       </div>

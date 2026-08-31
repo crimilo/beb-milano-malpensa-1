@@ -3,30 +3,38 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import { SITE } from '../data/site';
+import { I18N, PAGES, SITE } from '../data/site';
 
 interface Props {
+  lang: 'it' | 'en';
+  pageKey: string;
   title: string;
   description: string;
-  path: string;
   schema?: string;
   ogImage?: string;
-  bodyClass?: string;
 }
 
-const { title, description, path, schema, ogImage = '/og.jpg', bodyClass = '' } =
+const { lang, pageKey, title, description, schema, ogImage = '/og.jpg' } =
   Astro.props;
+const path = PAGES[pageKey][lang];
 const canonical = SITE.url + path;
+const alternateIt = SITE.url + PAGES[pageKey].it;
+const alternateEn = SITE.url + PAGES[pageKey].en;
+const alternateOther = lang === 'it' ? alternateEn : alternateIt;
+const htmlLang = I18N[lang].langLabel;
 ---
 
 <!doctype html>
-<html lang="it">
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="it" href={alternateIt} />
+    <link rel="alternate" hreflang="en" href={alternateEn} />
+    <link rel="alternate" hreflang="x-default" href={alternateIt} />
     <meta name="robots" content="index, follow" />
 
     <meta property="og:type" content="website" />
@@ -37,14 +45,15 @@ const canonical = SITE.url + path;
     <meta property="og:image" content={SITE.url + ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="it_IT" />
+    <meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'it' ? 'en_US' : 'it_IT'} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={SITE.url + ogImage} />
 
-    <meta name="theme-color" content="#1e5b47" />
+    <meta name="theme-color" content="#14382c" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -54,19 +63,21 @@ const canonical = SITE.url + path;
 
     {schema && <script type="application/ld+json" set:html={schema} />}
   </head>
-  <body class={bodyClass}>
-    <a class="skip-link" href="#main">Vai al contenuto</a>
-    <Header />
+  <body>
+    <a class="skip-link" href="#main">{lang === 'it' ? 'Vai al contenuto' : 'Skip to content'}</a>
+    <Header lang={lang} pageKey={pageKey} />
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
 
     <!-- Lightbox (tap to zoom / de-zoom, dark backdrop) -->
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Immagine ingrandita">
       <button id="lightbox-close" class="lightbox-close" aria-label="Chiudi">&#10005;</button>
       <img id="lightbox-img" src="" alt="" />
-      <p class="lightbox-hint">Tocca l&rsquo;immagine per ingrandire o ridurre</p>
+      <p class="lightbox-hint">
+        {lang === 'it' ? 'Tocca l\u2019immagine per ingrandire o ridurre' : 'Tap the image to zoom in or out'}
+      </p>
     </div>
 
     <WhatsAppButton />
@@ -95,7 +106,6 @@ const canonical = SITE.url + path;
             openLb(img.currentSrc || img.src, img.alt);
           });
         });
-        // tap on the image toggles zoom / de-zoom
         lbImg.addEventListener('click', function () {
           lbImg.classList.toggle('is-zoomed');
           if (lbHint) lbHint.style.display = lbImg.classList.contains('is-zoomed') ? 'none' : 'block';
@@ -108,7 +118,6 @@ const canonical = SITE.url + path;
           if (e.key === 'Escape') closeLb();
         });
 
-        // mobile nav toggle
         var toggle = document.getElementById('nav-toggle');
         var nav = document.getElementById('nav');
         if (toggle && nav) {

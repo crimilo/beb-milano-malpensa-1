@@ -29,14 +29,96 @@ export const SITE = {
   rating: { value: 3.7, count: 176 }, // Google
 };
 
-export const NAV = [
-  { href: '/', label: 'Home' },
-  { href: '/beb-vicino-aeroporto-malpensa/', label: 'Vicino a Malpensa' },
-  { href: '/beb-castano-primo/', label: 'Castano Primo' },
-  { href: '/beb-canale-villoresi/', label: 'Canale Villoresi' },
-  { href: '/camere/', label: 'Camere' },
-  { href: '/contatti/', label: 'Contatti' },
-];
+// Per-locale canonical paths — same slug, different locale prefix (it = default).
+export const PAGES: Record<string, { it: string; en: string }> = {
+  home: { it: '/', en: '/en/' },
+  lavoro: { it: '/beb-per-lavoro/', en: '/en/beb-per-lavoro/' },
+  malpensa: { it: '/beb-vicino-aeroporto-malpensa/', en: '/en/beb-vicino-aeroporto-malpensa/' },
+  castano: { it: '/beb-castano-primo/', en: '/en/beb-castano-primo/' },
+  camere: { it: '/camere/', en: '/en/camere/' },
+  contatti: { it: '/contatti/', en: '/en/contatti/' },
+};
+
+export const I18N = {
+  it: {
+    langLabel: 'it-IT',
+    brandName: 'B&B Milano Malpensa 1',
+    brandSub: 'Bed & Breakfast · Castano Primo',
+    brandAria: 'B&B Milano Malpensa 1 – home',
+    menuAria: 'Apri il menu',
+    navAria: 'Menu principale',
+    cta: 'Chiama ora',
+    ctaShort: 'Chiama',
+    nav: [
+      { href: PAGES.home.it, label: 'Home' },
+      { href: PAGES.lavoro.it, label: 'Per lavoro' },
+      { href: PAGES.malpensa.it, label: 'Vicino a Malpensa' },
+      { href: PAGES.castano.it, label: 'Castano Primo' },
+      { href: PAGES.camere.it, label: 'Camere' },
+      { href: PAGES.contatti.it, label: 'Contatti' },
+    ],
+    footer: {
+      about:
+        'Bed & Breakfast a gestione familiare a Castano Primo, a pochi minuti dall\u2019aeroporto di Malpensa: navetta, parcheggio, colazione e camere comode per chi viaggia per lavoro.',
+      sitemapTitle: 'Il sito',
+      contactTitle: 'Contatti',
+      book: 'Prenota su Booking.com',
+      note: 'P.IVA non disponibile',
+      sitemap: 'Sitemap',
+      robots: 'Robots',
+      reviews: 'Recensioni',
+    },
+    reviewLabel: 'Recensione Google',
+  },
+  en: {
+    langLabel: 'en',
+    brandName: 'B&B Milano Malpensa 1',
+    brandSub: 'Bed & Breakfast · Castano Primo',
+    brandAria: 'B&B Milano Malpensa 1 – home',
+    menuAria: 'Open menu',
+    navAria: 'Main menu',
+    cta: 'Call now',
+    ctaShort: 'Call',
+    nav: [
+      { href: PAGES.home.en, label: 'Home' },
+      { href: PAGES.lavoro.en, label: 'Business stays' },
+      { href: PAGES.malpensa.en, label: 'Near Malpensa' },
+      { href: PAGES.castano.en, label: 'Castano Primo' },
+      { href: PAGES.camere.en, label: 'Rooms' },
+      { href: PAGES.contatti.en, label: 'Contact' },
+    ],
+    footer: {
+      about:
+        'Family-run Bed & Breakfast in Castano Primo, a few minutes from Milan Malpensa airport: shuttle, parking, breakfast and comfortable rooms for business travellers.',
+      sitemapTitle: 'Site',
+      contactTitle: 'Contact',
+      book: 'Book on Booking.com',
+      note: 'VAT ID not available',
+      sitemap: 'Sitemap',
+      robots: 'Robots',
+      reviews: 'Reviews',
+    },
+    reviewLabel: 'Google review',
+  },
+} as const;
+
+export type Locale = keyof typeof I18N;
+
+// Template prices based on the average cost of B&Bs in the Malpensa / Castano
+// Primo area — always visible, indicative nightly rates (breakfast included).
+export const PRICES = {
+  single: { it: 'da €45', en: 'from €45' },
+  double: { it: 'da €60', en: 'from €60' },
+  twin: { it: 'da €60', en: 'from €60' },
+  triple: { it: 'da €75', en: 'from €75' },
+  family: { it: 'da €90', en: 'from €90' },
+  group: { it: 'da €25 a letto', en: 'from €25 per bed' },
+  note: {
+    it: 'Prezzi indicativi a notte, colazione inclusa. Sconti per soggiorni lunghi e settimanali.',
+    en: 'Indicative nightly rates, breakfast included. Discounts for long and weekly stays.',
+  },
+  weekly: { it: 'Tariffa settimanale per lavoro su richiesta', en: 'Weekly business rates on request' },
+} as const;
 
 // Genuine positive reviews published on Google (curated, not fabricated).
 export const REVIEWS = [

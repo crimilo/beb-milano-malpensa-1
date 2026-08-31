@@ -1,20 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Breadcrumbs from '../components/Breadcrumbs.astro';
-import CtaBand from '../components/CtaBand.astro';
-import Icon from '../components/Icon.astro';
-import { SITE, PHOTO, PAGES } from '../data/site';
-import { lodgingSchema, breadcrumbSchema } from '../data/schema';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, PHOTO, PAGES } from '../../data/site';
+import { lodgingSchema, breadcrumbSchema } from '../../data/schema';
 
-const lang = 'it' as const;
-const title = 'Contatti B&B Milano Malpensa 1 \u00b7 Castano Primo';
+const lang = 'en' as const;
+const title = 'Contact B&B Milano Malpensa 1 \u00b7 Castano Primo';
 const description =
-  'Telefono 339 294 6283, WhatsApp e indirizzo: Via Lonate Pozzolo 1, 20022 Castano Primo (MI). Come arrivare da Malpensa e da Milano.';
+  'Phone 339 294 6283, WhatsApp and address: Via Lonate Pozzolo 1, 20022 Castano Primo (MI). How to get here from Malpensa and Milan.';
 const schema = [
   lodgingSchema(lang),
   breadcrumbSchema(lang, [
     { name: 'Home', key: 'home' },
-    { name: 'Contatti', key: 'contatti' },
+    { name: 'Contact', key: 'contatti' },
   ]),
 ].join(',');
 ---
@@ -31,21 +31,21 @@ const schema = [
       <img src={PHOTO.struttura.src} alt={PHOTO.struttura.alt} width={PHOTO.struttura.w} height={PHOTO.struttura.h} fetchpriority="high" />
     </div>
     <div class="container hero-content">
-      <span class="hero-kicker">Contattaci</span>
-      <h1>Contatti e come arrivare</h1>
+      <span class="hero-kicker">Contact us</span>
+      <h1>Contact and how to get here</h1>
       <p class="lead">
-        Chiamaci o scrivici su WhatsApp: rispondiamo in italiano e in inglese,
-        con disponibilit&agrave;, prezzi e indicazioni in pochi minuti.
+        Call us or write on WhatsApp: we answer in Italian and English, with
+        availability, prices and directions in a few minutes.
       </p>
       <div class="btn-row">
-        <a class="btn btn--accent" href={SITE.phoneHref}>Chiama: {SITE.phoneDisplay}</a>
-        <a class="btn btn--ghost" href={SITE.whatsapp} target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+        <a class="btn btn--accent" href={SITE.phoneHref}>Call: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href={SITE.whatsapp} target="_blank" rel="noopener">Write on WhatsApp</a>
       </div>
     </div>
   </section>
 
   <div class="container section">
-    <Breadcrumbs items={[{ name: 'Contatti', href: PAGES.contatti.it }]} />
+    <Breadcrumbs items={[{ name: 'Contact', href: PAGES.contatti.en }]} />
   </div>
 
   <!-- Contact -->
@@ -53,13 +53,13 @@ const schema = [
     <div class="container">
       <div class="split">
         <div>
-          <span class="eyebrow">Contatti diretti</span>
-          <h2 id="contatti-title">Parliamone al telefono</h2>
+          <span class="eyebrow">Direct contacts</span>
+          <h2 id="contatti-title">Let&rsquo;s talk on the phone</h2>
           <ul class="contact-list">
             <li>
               <Icon name="phone" />
               <span>
-                Telefono<br />
+                Phone<br />
                 <a href={SITE.phoneHref}>{SITE.phoneDisplay}</a>
               </span>
             </li>
@@ -69,13 +69,13 @@ const schema = [
               </svg>
               <span>
                 WhatsApp<br />
-                <a href={SITE.whatsapp} target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+                <a href={SITE.whatsapp} target="_blank" rel="noopener">Write on WhatsApp</a>
               </span>
             </li>
             <li>
               <Icon name="pin" />
               <span>
-                Indirizzo<br />
+                Address<br />
                 <a href={SITE.mapsUrl} target="_blank" rel="noopener"
                   >{SITE.address.street}, {SITE.address.zip} {SITE.address.city} ({SITE.address.province})</a
                 >
@@ -85,7 +85,7 @@ const schema = [
               <Icon name="clock" />
               <span>
                 Check-in<br />
-                Flessibile, da concordare (anche in tarda serata)
+                Flexible, to be agreed (also late in the evening)
               </span>
             </li>
           </ul>
@@ -101,45 +101,44 @@ const schema = [
   <section class="section section--tint" aria-labelledby="arrivare-title">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Come arrivare</span>
-        <h2 id="arrivare-title">Raggiungici in pochi passi</h2>
+        <span class="eyebrow">How to get here</span>
+        <h2 id="arrivare-title">Reach us in a few steps</h2>
       </div>
       <div class="grid grid--3">
         <div class="card">
           <span class="card-ico"><Icon name="plane" size={26} /></span>
-          <h3>Da Malpensa (15 km)</h3>
+          <h3>From Malpensa (15 km)</h3>
           <p>
-            Navetta su richiesta: indicaci orario e terminal e ti veniamo a
-            prendere. In alternativa taxi, circa 20 minuti.
+            Shuttle on request: tell us the time and terminal and we will pick
+            you up. Alternatively taxi, about 20 minutes.
           </p>
         </div>
         <div class="card">
           <span class="card-ico"><Icon name="train" size={26} /></span>
-          <h3>Da Milano in treno</h3>
+          <h3>From Milan by train</h3>
           <p>
-            Da Milano Cadorna, linea Saronno&ndash;Novara: scendi a Castano
-            Primo e cammina 5 minuti fino al B&amp;B.
+            From Milan Cadorna, Saronno&ndash;Novara line: get off at Castano
+            Primo and walk 5 minutes to the B&amp;B.
           </p>
         </div>
         <div class="card">
           <span class="card-ico"><Icon name="car" size={26} /></span>
-          <h3>In auto</h3>
+          <h3>By car</h3>
           <p>
-            Autostrada A8 o A4, uscita Marcallo-Mesero: parcheggio gratuito in
-            struttura.
+            Motorway A8 or A4, Marcallo-Mesero exit: free parking on site.
           </p>
         </div>
       </div>
       <p style="margin-top: var(--space-3)">
         <a class="btn btn--line" href={SITE.mapsUrl} target="_blank" rel="noopener"
-          >Apri la posizione in Google Maps</a
+          >Open the location in Google Maps</a
         >
       </p>
     </div>
   </section>
 
   <CtaBand
-    title="Ti aspettiamo a Castano Primo"
-    text="Una chiamata e risolviamo tutto: disponibilit\u00e0, navetta, orari di arrivo e ogni tua domanda."
+    title="We look forward to seeing you in Castano Primo"
+    text="One call and everything is sorted: availability, shuttle, arrival times and any question you have."
   />
 </Layout>

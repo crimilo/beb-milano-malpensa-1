@@ -1,0 +1,168 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Gallery from '../../components/Gallery.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, PHOTO, PAGES } from '../../data/site';
+import { lodgingSchema, breadcrumbSchema } from '../../data/schema';
+
+const lang = 'en' as const;
+const title = 'B&B in Castano Primo, Milan province';
+const description =
+  'B&B in Castano Primo (Milan), 15 km from Malpensa: station for Milan a 5-min walk away, airport shuttle, parking. Rooms from \u20ac45. Call 339 294 6283.';
+const schema = [
+  lodgingSchema(lang),
+  breadcrumbSchema(lang, [
+    { name: 'Home', key: 'home' },
+    { name: 'B&B in Castano Primo', key: 'castano' },
+  ]),
+].join(',');
+---
+<Layout
+  lang={lang}
+  pageKey="castano"
+  title={title}
+  description={description}
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.piazza.src} alt={PHOTO.piazza.alt} width={PHOTO.piazza.w} height={PHOTO.piazza.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">In the heart of the Alto Milanese area</span>
+      <h1>B&amp;B in Castano Primo, Milan province</h1>
+      <p class="lead">
+        Our bed &amp; breakfast is in Castano Primo, a short walk from the
+        station for Milan and 15 km from Malpensa: the right base for work,
+        study and travel.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Call now: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href={PAGES.contatti.en}>How to get here</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs items={[{ name: 'B&B in Castano Primo', href: PAGES.castano.en }]} />
+  </div>
+
+  <!-- About the town -->
+  <section class="section" aria-labelledby="paese-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="eyebrow">The town</span>
+          <h2 id="paese-title">Castano Primo: quiet and convenient</h2>
+          <p>
+            Castano Primo is a town in the Metropolitan City of Milan, on the
+            Ticino river and surrounded by the green of the Ticino Valley
+            Regional Park. It feels like a village, but services are close:
+            supermarket, bars, restaurants and the main square are a few
+            minutes&rsquo; walk from the B&amp;B.
+          </p>
+          <p>
+            Location is the real strength: the <strong>Castano Primo railway
+            station</strong> (Saronno&ndash;Novara line) is a 5-minute walk
+            away and connects to Milan Cadorna in about an hour, while
+            Malpensa airport is only 15 km away.
+          </p>
+          <ul class="checklist">
+            <li><Icon name="check" /> Railway station a 5-minute walk away</li>
+            <li><Icon name="check" /> Conad, bars and restaurants within walking distance</li>
+            <li><Icon name="check" /> 15 km from Malpensa, ~30 km from Milan</li>
+            <li><Icon name="check" /> Close to the industrial areas of Busto Arsizio, Gallarate and Legnano</li>
+          </ul>
+        </div>
+        <figure class="photo photo--portrait">
+          <img src={PHOTO.giardino.src} alt={PHOTO.giardino.alt} width={PHOTO.giardino.w} height={PHOTO.giardino.h} loading="lazy" decoding="async" data-lightbox />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it is for -->
+  <section class="section section--tint" aria-labelledby="per-chi-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Who it is perfect for</span>
+        <h2 id="per-chi-title">Who chooses our B&amp;B in Castano Primo</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <span class="card-ico"><Icon name="car" size={26} /></span>
+          <h3>People working in the area</h3>
+          <p>
+            Professionals and technicians at the Alto Milanese companies:
+            parking, Wi-Fi and long-stay rates.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>Commuters to Milan</h3>
+          <p>
+            Travelling to Milan for work or study: by train from Castano Primo
+            station, a 5-minute walk away.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Travellers departing</h3>
+          <p>
+            Flying from Malpensa and looking for a comfortable, affordable
+            night, with shuttle and parking on site.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Getting here -->
+  <section class="section" aria-labelledby="arrivare-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How to get here</span>
+        <h2 id="arrivare-title">Reaching Castano Primo</h2>
+        <p class="lead">
+          Whether by car, train or plane, everything is simple here.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <span class="card-ico"><Icon name="car" size={26} /></span>
+          <h3>By car</h3>
+          <p>
+            From Milan: A8 or A4, exit <strong>Marcallo-Mesero</strong>, then
+            towards Castano Primo. Parking on site.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>By train</h3>
+          <p>
+            Saronno&ndash;Novara line: get off at <strong>Castano Primo</strong> and
+            reach the B&amp;B on foot in 5 minutes. From Milan Cadorna about
+            an hour.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>From Malpensa</h3>
+          <p>
+            Shuttle on request from the owner, or taxi (~20 minutes). Tell us
+            your flight and we will sort it out.
+          </p>
+        </div>
+      </div>
+      <Gallery photos={[PHOTO.salotto, PHOTO.scalinata, PHOTO.piazza]} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="In the area or planning to come?"
+    text="Call us: we will give you precise directions and check room availability right away."
+  />
+</Layout>

@@ -1,15 +1,23 @@
 ---
-import { REVIEWS } from '../data/site';
+import { I18N, REVIEWS } from '../data/site';
+
+interface Props {
+  lang: 'it' | 'en';
+}
+const { lang } = Astro.props;
+const t = I18N[lang];
+const label = t.reviewLabel;
+const heading =
+  lang === 'it'
+    ? { kicker: 'La voce degli ospiti', title: 'Cosa dicono chi ha soggiornato da noi', lead: 'Recensioni reali pubblicate su Google da ospiti che hanno scelto il B&B Milano Malpensa 1.' }
+    : { kicker: 'Guest voices', title: 'What our guests say', lead: 'Real reviews published on Google by guests who stayed at B&B Milano Malpensa 1.' };
 ---
 <section class="section" aria-labelledby="recensioni-title">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">La voce degli ospiti</span>
-      <h2 id="recensioni-title">Cosa dicono chi ha soggiornato da noi</h2>
-      <p class="lead">
-        Recensioni reali pubblicate su Google da ospiti che hanno scelto il
-        B&amp;B Milano Malpensa 1.
-      </p>
+      <span class="eyebrow">{heading.kicker}</span>
+      <h2 id="recensioni-title">{heading.title}</h2>
+      <p class="lead">{heading.lead}</p>
     </div>
     <div class="grid grid--3">
       {
@@ -19,7 +27,7 @@ import { REVIEWS } from '../data/site';
             <blockquote>{r.quote}</blockquote>
             <footer>
               <cite>{r.author}</cite>
-              <div class="review-src">{r.detail}</div>
+              <div class="review-src">{label}</div>
             </footer>
           </article>
         ))

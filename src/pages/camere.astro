@@ -4,24 +4,26 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Gallery from '../components/Gallery.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, PHOTO } from '../data/site';
+import { SITE, PHOTO, PRICES, PAGES } from '../data/site';
 import { lodgingSchema, breadcrumbSchema } from '../data/schema';
 
-const title = 'Camere B&B Milano Malpensa 1 \u00b7 Castano Primo';
+const lang = 'it' as const;
+const title = 'Camere e prezzi B&B Milano Malpensa 1 \u00b7 Castano Primo';
 const description =
-  'Camere con bagno privato, TV, Wi-Fi e aria condizionata: singole, matrimoniali, triple e quadruple con letto a castello. Chiama 339 294 6283.';
+  'Camere da \u20ac45 a notte con bagno privato, TV, Wi-Fi e aria condizionata: singole, doppie, triple e quadruple con letto a castello. Chiama 339 294 6283.';
 const schema = [
-  lodgingSchema(),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'Camere', path: '/camere/' },
+  lodgingSchema(lang),
+  breadcrumbSchema(lang, [
+    { name: 'Home', key: 'home' },
+    { name: 'Camere e prezzi', key: 'camere' },
   ]),
 ].join(',');
 ---
 <Layout
+  lang={lang}
+  pageKey="camere"
   title={title}
   description={description}
-  path="/camere/"
   schema={`[${schema}]`}
 >
   <!-- Hero -->
@@ -31,25 +33,47 @@ const schema = [
     </div>
     <div class="container hero-content">
       <span class="hero-kicker">Le nostre camere</span>
-      <h1>Camere semplici, pulite e confortevoli</h1>
+      <h1>Camere e prezzi: semplici, pulite, convenienti</h1>
       <p class="lead">
         Tutte le camere hanno bagno privato, TV, Wi-Fi gratuito e aria
-        condizionata. Dalla matrimoniale alla quadrupla con letto a castello:
-        c&rsquo;&egrave; la soluzione giusta per ogni viaggio.
+        condizionata. Prezzi sempre visibili, colazione inclusa, da
+        &euro;45 a notte.
       </p>
       <div class="btn-row">
         <a class="btn btn--accent" href={SITE.phoneHref}>Chiama per disponibilit&agrave;</a>
-        <a class="btn btn--ghost" href="/contatti/">Contatti e come arrivare</a>
+        <a class="btn btn--ghost" href={PAGES.contatti.it}>Contatti e come arrivare</a>
       </div>
     </div>
   </section>
 
   <div class="container section">
-    <Breadcrumbs items={[{ name: 'Camere', href: '/camere/' }]} />
+    <Breadcrumbs items={[{ name: 'Camere e prezzi', href: PAGES.camere.it }]} />
   </div>
 
-  <!-- Room types -->
-  <section class="section" aria-labelledby="tipologie-title">
+  <!-- Price summary -->
+  <section class="section" aria-labelledby="tariffe-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Le tariffe</span>
+        <h2 id="tariffe-title">Quanto costa dormire qui</h2>
+        <p class="lead">{PRICES.note.it}</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.single.it}</strong><span>singola</span></div>
+        <div class="fact"><strong>{PRICES.double.it}</strong><span>matrimoniale</span></div>
+        <div class="fact"><strong>{PRICES.twin.it}</strong><span>doppia letti singoli</span></div>
+        <div class="fact"><strong>{PRICES.triple.it}</strong><span>tripla</span></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.family.it}</strong><span>quadrupla famiglia</span></div>
+        <div class="fact"><strong>{PRICES.group.it}</strong><span>letto a castello</span></div>
+        <div class="fact"><strong>7+ notti</strong><span>{PRICES.weekly.it}</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room types with photos below -->
+  <section class="section section--tint" aria-labelledby="tipologie-title">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Le tipologie</span>
@@ -59,62 +83,73 @@ const schema = [
           biancheria, asciugamani e tutto il necessario per il tuo soggiorno.
         </p>
       </div>
-      <div class="grid grid--3">
-        <div class="card">
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Camera singola</h3>
+          <p>Per chi viaggia da solo, in trasferta o per una notte prima del volo.</p>
+          <span class="price">{PRICES.single.it} <small>/ notte, colazione inclusa</small></span>
+        </div>
+        <div class="room-photos">
+          <Gallery photos={[PHOTO.lettoSingoli]} />
+        </div>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
           <h3>Camera matrimoniale</h3>
-          <p>
-            Letto matrimoniale, bagno privato, TV, Wi-Fi e aria condizionata:
-            l&rsquo;ideale per coppie in viaggio.
-          </p>
+          <p>Letto matrimoniale comodo e camera spaziosa: l&rsquo;ideale per le coppie.</p>
+          <span class="price">{PRICES.double.it} <small>/ notte, colazione inclusa</small></span>
         </div>
-        <div class="card">
-          <h3>Camera con letti singoli</h3>
-          <p>
-            Due letti singoli, perfetta per amici o colleghi che viaggiano
-            insieme.
-          </p>
+        <div class="room-photos">
+          <Gallery photos={[PHOTO.lettoMatrimoniale, PHOTO.lettoMatrimoniale3]} />
         </div>
-        <div class="card">
-          <h3>Camera famiglia / gruppo</h3>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Camera doppia con letti singoli</h3>
+          <p>Due letti separati: perfetta per colleghi di lavoro o amici in viaggio.</p>
+          <span class="price">{PRICES.twin.it} <small>/ notte, colazione inclusa</small></span>
+        </div>
+        <div class="room-photos">
+          <Gallery photos={[PHOTO.dueLettiSingoli, PHOTO.lettoSingoli]} />
+        </div>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Camera tripla</h3>
+          <p>Matrimoniale e letto singolo: la soluzione per piccole famiglie.</p>
+          <span class="price">{PRICES.triple.it} <small>/ notte, colazione inclusa</small></span>
+        </div>
+        <div class="room-photos">
+          <Gallery photos={[PHOTO.matrimonialeSingolo]} />
+        </div>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Camera famiglia o gruppo</h3>
           <p>
             Fino a 4-6 posti: matrimoniale, letti singoli e letto a castello
-            per famiglie e comitive.
+            per famiglie, comitive e gruppi di lavoro.
           </p>
+          <span class="price">{PRICES.family.it} <small>/ notte, colazione inclusa</small></span>
+          <span class="price-note">In alternativa, {PRICES.group.it} nella zona castello.</span>
+        </div>
+        <div class="room-photos">
+          <Gallery
+            photos={[
+              PHOTO.castelloSingolo,
+              PHOTO.castello2,
+              PHOTO.quattroLetti,
+              PHOTO.lettoCastello,
+              PHOTO.castelloBasso,
+            ]}
+          />
         </div>
       </div>
-      <p class="lead" style="margin-top: var(--space-3)">
-        I prezzi sono contenuti e variano in base alla stagione e alla durata:
-        chiamaci al <a href={SITE.phoneHref}><strong>{SITE.phoneDisplay}</strong></a> per
-        disponibilit&agrave; e tariffe.
-      </p>
-    </div>
-  </section>
-
-  <!-- Gallery rooms -->
-  <section class="section section--tint" aria-labelledby="foto-camere-title">
-    <div class="container">
-      <div class="section-head">
-        <h2 id="foto-camere-title">Le camere in foto</h2>
-        <p class="lead">Tocca le foto per vederle a schermo intero.</p>
-      </div>
-      <Gallery
-        cols={4}
-        eagerFirst
-        photos={[
-          PHOTO.lettoMatrimoniale,
-          PHOTO.lettoMatrimoniale3,
-          PHOTO.lettoSingoli,
-          PHOTO.dueLettiSingoli,
-          PHOTO.quattroLetti,
-          PHOTO.castelloSingolo,
-          PHOTO.castello2,
-          PHOTO.lettoCastello,
-          PHOTO.castelloBasso,
-          PHOTO.matrimonialeSingolo,
-          PHOTO.tv,
-          PHOTO.salotto,
-        ]}
-      />
     </div>
   </section>
 
@@ -148,7 +183,7 @@ const schema = [
             <li><Icon name="check" /> Parcheggio in struttura</li>
             <li><Icon name="check" /> Animali ammessi (da concordare)</li>
             <li><Icon name="check" /> Navetta per Malpensa su richiesta</li>
-            <li><Icon name="check" /> Bici a disposizione degli ospiti</li>
+            <li><Icon name="check" /> Tariffe settimanali per lavoro</li>
           </ul>
         </div>
         <figure class="photo photo--portrait">
@@ -160,6 +195,6 @@ const schema = [
 
   <CtaBand
     title="Trovi la camera giusta per il tuo viaggio?"
-    text="Chiamaci o scrivici su WhatsApp: ti confermiamo disponibilit\u00e0, prezzo e servizi in pochi minuti."
+    text="Chiamaci o scrivici su WhatsApp: ti confermiamo disponibilit\u00e0, prezzo esatto e servizi in pochi minuti."
   />
 </Layout>

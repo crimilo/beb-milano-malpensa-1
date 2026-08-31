@@ -1,0 +1,191 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Gallery from '../../components/Gallery.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, PHOTO, PRICES, PAGES } from '../../data/site';
+import { lodgingSchema, breadcrumbSchema, faqSchema } from '../../data/schema';
+
+const lang = 'en' as const;
+const title = 'Business B&B near Milan and Malpensa \u00b7 Castano Primo';
+const description =
+  'Business accommodation in Castano Primo (Milan): rooms from \u20ac45 with Wi-Fi and parking, Malpensa shuttle, Milan by train in 1h. Call 339 294 6283.';
+const faqs = [
+  {
+    q: 'Do you offer discounts for long or weekly stays?',
+    a: 'Yes: for people working in the area we offer reduced rates for weekly and monthly stays. Call 339 294 6283 for a personalised quote.',
+  },
+  {
+    q: 'How can I reach Milan for work from the B&B?',
+    a: 'Castano Primo station is a 5-minute walk away: the Saronno\u2013Novara line takes you to Milan Cadorna in about an hour, without a car.',
+  },
+  {
+    q: 'Can I check in late in the evening after work?',
+    a: 'Of course: check-in is flexible and agreed in advance, exactly for those arriving late at night or leaving at dawn.',
+  },
+];
+const schema = [
+  lodgingSchema(lang),
+  breadcrumbSchema(lang, [
+    { name: 'Home', key: 'home' },
+    { name: 'Business B&B', key: 'lavoro' },
+  ]),
+  faqSchema(lang, faqs),
+].join(',');
+---
+<Layout
+  lang={lang}
+  pageKey="lavoro"
+  title={title}
+  description={description}
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.salotto.src} alt={PHOTO.salotto.alt} width={PHOTO.salotto.w} height={PHOTO.salotto.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Business trips, commuters, companies</span>
+      <h1>Business B&amp;B: your base between Milan and Malpensa</h1>
+      <p class="lead">
+        Quiet room, free Wi-Fi, parking and breakfast: in Castano Primo you
+        will find everything you need to work and rest, with Milan one hour
+        away by train and the airport 15 km away.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Call for rates: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href={PAGES.camere.en}>Rooms and prices</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs items={[{ name: 'Business B&B', href: PAGES.lavoro.en }]} />
+  </div>
+
+  <!-- Why business -->
+  <section class="section" aria-labelledby="perche-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">For business travellers</span>
+        <h2 id="perche-title">Why choose our B&amp;B for work</h2>
+        <p class="lead">
+          Not an anonymous hotel: a family-run base, convenient and honestly
+          priced, designed for people travelling for work.
+        </p>
+      </div>
+      <ul class="checklist">
+        <li><Icon name="check" /> <span><strong>Free Wi-Fi</strong> and a quiet room to work and rest.</span></li>
+        <li><Icon name="check" /> <span><strong>Parking on site</strong>, ideal if you arrive by car from outside Milan.</span></li>
+        <li><Icon name="check" /> <span><strong>Milan by train in about an hour</strong>: station a 5-minute walk away.</span></li>
+        <li><Icon name="check" /> <span><strong>Malpensa shuttle</strong> on request, for business flights.</span></li>
+        <li><Icon name="check" /> <span><strong>Flexible check-in</strong>, even late in the evening or at dawn.</span></li>
+        <li><Icon name="check" /> <span><strong>Reduced rates</strong> for weekly and monthly stays.</span></li>
+      </ul>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.single.en}</strong><span>single room</span></div>
+        <div class="fact"><strong>{PRICES.double.en}</strong><span>double room</span></div>
+        <div class="fact"><strong>~1h</strong><span>by train to Milan</span></div>
+        <div class="fact"><strong>15 km</strong><span>from Malpensa T1/T2</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="section section--tint" aria-labelledby="per-chi-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Who it is for</span>
+        <h2 id="per-chi-title">Who chooses the B&amp;B for work</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <span class="card-ico"><Icon name="car" size={26} /></span>
+          <h3>Technicians and installers</h3>
+          <p>
+            Working on sites and plants in the Alto Milanese area (Busto
+            Arsizio, Gallarate, Legnano): parking and early breakfast.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>Commuters and consultants</h3>
+          <p>
+            Meetings in Milan: by train from Castano Primo station, with
+            stress-free evening returns.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Business flyers</h3>
+          <p>
+            Departures and arrivals at Malpensa with shuttle on request, even
+            at inconvenient times, at B&amp;B prices.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rates -->
+  <section class="section" aria-labelledby="tariffe-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Rates</span>
+        <h2 id="tariffe-title">Clear prices, always visible</h2>
+        <p class="lead">{PRICES.note.en}</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.single.en}</strong><span>single</span></div>
+        <div class="fact"><strong>{PRICES.double.en}</strong><span>double</span></div>
+        <div class="fact"><strong>{PRICES.twin.en}</strong><span>twin</span></div>
+        <div class="fact"><strong>{PRICES.triple.en}</strong><span>triple</span></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.family.en}</strong><span>family room</span></div>
+        <div class="fact"><strong>{PRICES.group.en}</strong><span>bunk bed</span></div>
+        <div class="fact"><strong>7+ nights</strong><span>{PRICES.weekly.en}</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms -->
+  <section class="section section--tint" aria-labelledby="camere-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="camere-title">The rooms for your business stay</h2>
+      </div>
+      <Gallery
+        photos={[PHOTO.lettoMatrimoniale3, PHOTO.lettoSingoli, PHOTO.tv, PHOTO.bagno9]}
+        eagerFirst
+      />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2 id="faq-title">The answers you need before booking</h2>
+      </div>
+      <div class="faq">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Need accommodation for work?"
+    text="Call us: we will find the right rate for your trip, even for long stays."
+  />
+</Layout>

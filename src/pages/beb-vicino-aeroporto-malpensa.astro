@@ -4,9 +4,10 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Gallery from '../components/Gallery.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, PHOTO } from '../data/site';
+import { SITE, PHOTO, PAGES } from '../data/site';
 import { lodgingSchema, breadcrumbSchema, faqSchema } from '../data/schema';
 
+const lang = 'it' as const;
 const title = 'B&B vicino a Malpensa con navetta e parcheggio';
 const description =
   'B&B a 15 km da Malpensa (T1/T2) con navetta su richiesta e parcheggio: dormi prima del volo e parti senza pensieri. Chiama 339 294 6283.';
@@ -25,22 +26,23 @@ const faqs = [
   },
   {
     q: 'Accettate check-in in tarda serata o notturni?',
-    a: 'S\u00ec, siamo abituati a ospiti con voli al mattino presto o arrivi serali. Il check-in flessibile va concordato in anticipo chiamando il 339 294 6283.',
+    a: 'S\u00ec, siamo abituati a ospiti con voli al mattino presto o arrivi serali, anche per trasferte di lavoro. Il check-in flessibile va concordato in anticipo chiamando il 339 294 6283.',
   },
 ];
 const schema = [
-  lodgingSchema(),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'B&B vicino a Malpensa', path: '/beb-vicino-aeroporto-malpensa/' },
+  lodgingSchema(lang),
+  breadcrumbSchema(lang, [
+    { name: 'Home', key: 'home' },
+    { name: 'B&B vicino a Malpensa', key: 'malpensa' },
   ]),
-  faqSchema(faqs),
+  faqSchema(lang, faqs),
 ].join(',');
 ---
 <Layout
+  lang={lang}
+  pageKey="malpensa"
   title={title}
   description={description}
-  path="/beb-vicino-aeroporto-malpensa/"
   schema={`[${schema}]`}
 >
   <!-- Hero -->
@@ -58,16 +60,14 @@ const schema = [
       </p>
       <div class="btn-row">
         <a class="btn btn--accent" href={SITE.phoneHref}>Chiama ora: {SITE.phoneDisplay}</a>
-        <a class="btn btn--ghost" href="/contatti/">Come organizzare la navetta</a>
+        <a class="btn btn--ghost" href={PAGES.contatti.it}>Come organizzare la navetta</a>
       </div>
     </div>
   </section>
 
   <div class="container section">
     <Breadcrumbs
-      items={[
-        { name: 'B&B vicino a Malpensa', href: '/beb-vicino-aeroporto-malpensa/' },
-      ]}
+      items={[{ name: 'B&B vicino a Malpensa', href: PAGES.malpensa.it }]}
     />
   </div>
 
@@ -78,9 +78,9 @@ const schema = [
         <span class="eyebrow">La soluzione prima del volo</span>
         <h2 id="perche-title">Perch&eacute; scegliere un B&amp;B vicino a Malpensa</h2>
         <p class="lead">
-          Voli all&rsquo;alba, scali lunghi, partenze in gruppo: la notte prima
-          del volo si risolve a Castano Primo, a un prezzo ben diverso dagli
-          hotel in aeroporto.
+          Voli all&rsquo;alba, scali lunghi, trasferte e partenze in gruppo: la
+          notte prima del volo si risolve a Castano Primo, a un prezzo ben
+          diverso dagli hotel in aeroporto.
         </p>
       </div>
       <ul class="checklist">
@@ -88,7 +88,7 @@ const schema = [
         <li><Icon name="check" /> <span><strong>Parcheggio in struttura</strong>, comodo per chi arriva in auto da lontano e lascia l&rsquo;auto prima di partire.</span></li>
         <li><Icon name="check" /> <span><strong>Check-in flessibile</strong>: arrivi in tarda serata e parti all&rsquo;alba? Nessun problema, basta avvisarci.</span></li>
         <li><Icon name="check" /> <span><strong>Camere per famiglie e gruppi</strong>: fino a 4-6 posti letto, ideali anche per comitive in partenza.</span></li>
-        <li><Icon name="check" /> <span><strong>Prezzo onesto</strong>: il comfort di un B&amp;B familiare senza le tariffe degli hotel aeroportuali.</span></li>
+        <li><Icon name="check" /> <span><strong>Prezzo onesto, sempre visibile</strong>: il comfort di un B&amp;B familiare senza le tariffe degli hotel aeroportuali.</span></li>
       </ul>
       <div class="facts">
         <div class="fact"><strong>15 km</strong><span>da Malpensa T1/T2</span></div>

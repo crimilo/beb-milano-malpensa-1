@@ -1,0 +1,200 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Gallery from '../../components/Gallery.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, PHOTO, PRICES, PAGES } from '../../data/site';
+import { lodgingSchema, breadcrumbSchema } from '../../data/schema';
+
+const lang = 'en' as const;
+const title = 'Rooms & prices B&B Milano Malpensa 1 \u00b7 Castano Primo';
+const description =
+  'Rooms from \u20ac45 a night with private bathroom, TV, Wi-Fi and air conditioning: singles, doubles, triples, family rooms with bunk beds. Call 339 294 6283.';
+const schema = [
+  lodgingSchema(lang),
+  breadcrumbSchema(lang, [
+    { name: 'Home', key: 'home' },
+    { name: 'Rooms and prices', key: 'camere' },
+  ]),
+].join(',');
+---
+<Layout
+  lang={lang}
+  pageKey="camere"
+  title={title}
+  description={description}
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.salotto.src} alt={PHOTO.salotto.alt} width={PHOTO.salotto.w} height={PHOTO.salotto.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Our rooms</span>
+      <h1>Rooms and prices: simple, clean, affordable</h1>
+      <p class="lead">
+        Every room has a private bathroom, TV, free Wi-Fi and air
+        conditioning. Prices always visible, breakfast included, from
+        &euro;45 a night.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Call for availability</a>
+        <a class="btn btn--ghost" href={PAGES.contatti.en}>Contact and how to get here</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs items={[{ name: 'Rooms and prices', href: PAGES.camere.en }]} />
+  </div>
+
+  <!-- Price summary -->
+  <section class="section" aria-labelledby="tariffe-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Rates</span>
+        <h2 id="tariffe-title">How much it costs to stay here</h2>
+        <p class="lead">{PRICES.note.en}</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.single.en}</strong><span>single</span></div>
+        <div class="fact"><strong>{PRICES.double.en}</strong><span>double</span></div>
+        <div class="fact"><strong>{PRICES.twin.en}</strong><span>twin</span></div>
+        <div class="fact"><strong>{PRICES.triple.en}</strong><span>triple</span></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><strong>{PRICES.family.en}</strong><span>family room</span></div>
+        <div class="fact"><strong>{PRICES.group.en}</strong><span>bunk bed</span></div>
+        <div class="fact"><strong>7+ nights</strong><span>{PRICES.weekly.en}</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room types with photos below -->
+  <section class="section section--tint" aria-labelledby="tipologie-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Room types</span>
+        <h2 id="tipologie-title">Which room is right for you?</h2>
+        <p class="lead">
+          Every room is simply yet carefully furnished, with linen, towels and
+          everything you need for your stay.
+        </p>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Single room</h3>
+          <p>For solo travellers, business trips or one night before a flight.</p>
+          <span class="price">{PRICES.single.en} <small>/ night, breakfast included</small></span>
+        </div>
+        <div class="room-photos">
+          <Gallery photos={[PHOTO.lettoSingoli]} />
+        </div>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Double room</h3>
+          <p>A comfortable double bed and a spacious room: ideal for couples.</p>
+          <span class="price">{PRICES.double.en} <small>/ night, breakfast included</small></span>
+        </div>
+        <div class="room-photos">
+          <Gallery photos={[PHOTO.lettoMatrimoniale, PHOTO.lettoMatrimoniale3]} />
+        </div>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Twin room</h3>
+          <p>Two separate single beds: perfect for colleagues or friends travelling together.</p>
+          <span class="price">{PRICES.twin.en} <small>/ night, breakfast included</small></span>
+        </div>
+        <div class="room-photos">
+          <Gallery photos={[PHOTO.dueLettiSingoli, PHOTO.lettoSingoli]} />
+        </div>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Triple room</h3>
+          <p>Double bed plus a single bed: the solution for small families.</p>
+          <span class="price">{PRICES.triple.en} <small>/ night, breakfast included</small></span>
+        </div>
+        <div class="room-photos">
+          <Gallery photos={[PHOTO.matrimonialeSingolo]} />
+        </div>
+      </div>
+
+      <div class="room">
+        <div class="room-card">
+          <h3>Family or group room</h3>
+          <p>
+            Up to 4\u20136 beds: double bed, single beds and bunk beds for
+            families, groups and work crews.
+          </p>
+          <span class="price">{PRICES.family.en} <small>/ night, breakfast included</small></span>
+          <span class="price-note">Alternatively, {PRICES.group.en} in the bunk-bed area.</span>
+        </div>
+        <div class="room-photos">
+          <Gallery
+            photos={[
+              PHOTO.castelloSingolo,
+              PHOTO.castello2,
+              PHOTO.quattroLetti,
+              PHOTO.lettoCastello,
+              PHOTO.castelloBasso,
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bathrooms -->
+  <section class="section" aria-labelledby="bagni-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Private bathrooms</span>
+        <h2 id="bagni-title">Private bathroom in every room</h2>
+        <p class="lead">
+          No shared bathrooms: each room has its own, with shower and
+          sanitary fittings.
+        </p>
+      </div>
+      <Gallery photos={[PHOTO.bagno5, PHOTO.bagno3, PHOTO.bagno7, PHOTO.bagno9]} />
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section section--tint" aria-labelledby="servizi-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="eyebrow">Services included</span>
+          <h2 id="servizi-title">Everything you need, no surprises</h2>
+          <ul class="checklist">
+            <li><Icon name="check" /> Breakfast: coffee, croissants and pastries</li>
+            <li><Icon name="check" /> Free Wi-Fi throughout the property</li>
+            <li><Icon name="check" /> Air conditioning</li>
+            <li><Icon name="check" /> TV in the room</li>
+            <li><Icon name="check" /> Parking on site</li>
+            <li><Icon name="check" /> Pets allowed (to be agreed)</li>
+            <li><Icon name="check" /> Malpensa shuttle on request</li>
+            <li><Icon name="check" /> Weekly rates for work stays</li>
+          </ul>
+        </div>
+        <figure class="photo photo--portrait">
+          <img src={PHOTO.colazione.src} alt={PHOTO.colazione.alt} width={PHOTO.colazione.w} height={PHOTO.colazione.h} loading="lazy" decoding="async" data-lightbox />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Found the right room for your trip?"
+    text="Call us or write on WhatsApp: we will confirm availability, the exact price and services in a few minutes."
+  />
+</Layout>

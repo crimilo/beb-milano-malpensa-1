@@ -1,0 +1,142 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Gallery from '../../components/Gallery.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, PHOTO, PAGES } from '../../data/site';
+import { lodgingSchema, breadcrumbSchema, faqSchema } from '../../data/schema';
+
+const lang = 'en' as const;
+const title = 'B&B near Malpensa airport with shuttle and parking';
+const description =
+  'B&B 15 km from Malpensa (T1/T2) with shuttle on request and parking: sleep before your flight and leave stress-free. Call 339 294 6283.';
+const faqs = [
+  {
+    q: 'How far is the B&B from Malpensa airport?',
+    a: 'B&B Milano Malpensa 1 is in Castano Primo, about 15 km from terminals T1 and T2: roughly 20 minutes by car, with shuttle on request from the owner.',
+  },
+  {
+    q: 'How does the shuttle service to Malpensa work?',
+    a: 'On request we arrange the transfer to and from the airport, even for early-morning flights or late arrivals. We recommend agreeing it when booking: call 339 294 6283.',
+  },
+  {
+    q: 'Can I leave my car parked while I fly?',
+    a: 'The B&B has parking on site. For parking during your trip, contact us before booking: we will check availability and conditions together.',
+  },
+  {
+    q: 'Do you accept late-night or early check-in?',
+    a: 'Yes, we are used to guests with early-morning flights or evening arrivals, including business trips. Flexible check-in must be agreed in advance by calling 339 294 6283.',
+  },
+];
+const schema = [
+  lodgingSchema(lang),
+  breadcrumbSchema(lang, [
+    { name: 'Home', key: 'home' },
+    { name: 'B&B near Malpensa', key: 'malpensa' },
+  ]),
+  faqSchema(lang, faqs),
+].join(',');
+---
+<Layout
+  lang={lang}
+  pageKey="malpensa"
+  title={title}
+  description={description}
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.fiumePieno.src} alt={PHOTO.fiumePieno.alt} width={PHOTO.fiumePieno.w} height={PHOTO.fiumePieno.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">For travellers flying from Malpensa</span>
+      <h1>B&amp;B near Malpensa airport, with shuttle</h1>
+      <p class="lead">
+        Sleep the night before your flight in Castano Primo and reach the
+        terminal stress-free: shuttle on request, parking on site and
+        flexible check-in, even at dawn.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Call now: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href={PAGES.contatti.en}>Arrange the shuttle</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs items={[{ name: 'B&B near Malpensa', href: PAGES.malpensa.en }]} />
+  </div>
+
+  <!-- Why for flyers -->
+  <section class="section" aria-labelledby="perche-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The solution before your flight</span>
+        <h2 id="perche-title">Why choose a B&amp;B near Malpensa</h2>
+        <p class="lead">
+          Early flights, long stopovers, business trips and group departures:
+          the night before the flight is sorted in Castano Primo, at a very
+          different price from the airport hotels.
+        </p>
+      </div>
+      <ul class="checklist">
+        <li><Icon name="check" /> <span><strong>Shuttle to Malpensa T1/T2</strong> on request: we pick you up and take you back, even for flights at inconvenient times.</span></li>
+        <li><Icon name="check" /> <span><strong>Parking on site</strong>, handy if you arrive by car from far away and leave it before flying.</span></li>
+        <li><Icon name="check" /> <span><strong>Flexible check-in</strong>: arriving late at night and leaving at dawn? No problem, just let us know.</span></li>
+        <li><Icon name="check" /> <span><strong>Rooms for families and groups</strong>: up to 4\u20136 beds, ideal for departing groups too.</span></li>
+        <li><Icon name="check" /> <span><strong>Honest, always-visible prices</strong>: the comfort of a family B&amp;B without airport-hotel rates.</span></li>
+      </ul>
+      <div class="facts">
+        <div class="fact"><strong>15 km</strong><span>from Malpensa T1/T2</span></div>
+        <div class="fact"><strong>~20 min</strong><span>by car / shuttle</span></div>
+        <div class="fact"><strong>24h</strong><span>flexible check-in on request</span></div>
+        <div class="fact"><strong>6+</strong><span>beds for groups</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photos -->
+  <section class="section section--tint" aria-labelledby="foto-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="foto-title">How we welcome you</h2>
+        <p class="lead">
+          Simple, direct hospitality, as our guests tell in their Google
+          reviews.
+        </p>
+      </div>
+      <Gallery photos={[PHOTO.cartellone, PHOTO.lettoMatrimoniale3, PHOTO.colazione, PHOTO.veranda]} />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2 id="faq-title">Everything you need to know before leaving</h2>
+      </div>
+      <div class="faq">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+      <p class="lead" style="margin-top: var(--space-3)">
+        More questions? Call <a href={SITE.phoneHref}><strong>{SITE.phoneDisplay}</strong></a>:
+        we answer in Italian and English.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Flying from Malpensa?"
+    text="Call us before booking: we will sort out shuttle, parking and times together, so you can travel worry-free."
+  />
+</Layout>
