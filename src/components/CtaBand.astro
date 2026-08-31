@@ -1,0 +1,32 @@
+---
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  text: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+const {
+  title,
+  text,
+  primaryLabel = 'Chiama ora',
+  primaryHref = SITE.phoneHref,
+  secondaryLabel = 'Scrivici su WhatsApp',
+  secondaryHref = SITE.whatsapp,
+} = Astro.props;
+---
+<section class="section">
+  <div class="container">
+    <div class="cta-band">
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={primaryHref}>{primaryLabel}</a>
+        <a class="btn btn--ghost" href={secondaryHref} target="_blank" rel="noopener">{secondaryLabel}</a>
+      </div>
+    </div>
+  </div>
+</section>

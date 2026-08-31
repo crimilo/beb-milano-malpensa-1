@@ -1,0 +1,15 @@
+{
+  "name": "B&B Milano Malpensa 1",
+  "short_name": "B&B Malpensa 1",
+  "description": "Bed & Breakfast a Castano Primo, vicino all'aeroporto di Malpensa: navetta, parcheggio, colazione e ciclabile del Villoresi.",
+  "lang": "it",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbf7f0",
+  "theme_color": "#1e5b47",
+  "icons": [
+    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

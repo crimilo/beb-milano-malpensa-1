@@ -1,0 +1,29 @@
+---
+import { REVIEWS } from '../data/site';
+---
+<section class="section" aria-labelledby="recensioni-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">La voce degli ospiti</span>
+      <h2 id="recensioni-title">Cosa dicono chi ha soggiornato da noi</h2>
+      <p class="lead">
+        Recensioni reali pubblicate su Google da ospiti che hanno scelto il
+        B&amp;B Milano Malpensa 1.
+      </p>
+    </div>
+    <div class="grid grid--3">
+      {
+        REVIEWS.map((r) => (
+          <article class="review">
+            <div class="review-stars" aria-label="5 stelle su 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <blockquote>{r.quote}</blockquote>
+            <footer>
+              <cite>{r.author}</cite>
+              <div class="review-src">{r.detail}</div>
+            </footer>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

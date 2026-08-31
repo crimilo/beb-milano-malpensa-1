@@ -1,0 +1,21 @@
+---
+import type { Photo as PhotoT } from '../data/site';
+
+interface Props {
+  photo: PhotoT;
+  alt?: string;
+  class?: string;
+  eager?: boolean;
+}
+const { photo, alt, class: cls = '', eager = false } = Astro.props;
+---
+<img
+  class={cls}
+  src={photo.src}
+  alt={alt ?? photo.alt}
+  width={photo.w}
+  height={photo.h}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding="async"
+  data-lightbox
+/>

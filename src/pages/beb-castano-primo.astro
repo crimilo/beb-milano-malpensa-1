@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Gallery from '../components/Gallery.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PHOTO } from '../data/site';
+import { lodgingSchema, breadcrumbSchema } from '../data/schema';
+
+const title = 'B&B a Castano Primo, in provincia di Milano';
+const description =
+  'B&B a Castano Primo (MI), sul fiume Ticino e a 15 km da Malpensa: stazione a 5 min a piedi, navetta aeroporto, parcheggio. Chiama 339 294 6283.';
+const schema = [
+  lodgingSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'B&B a Castano Primo', path: '/beb-castano-primo/' },
+  ]),
+].join(',');
+---
+<Layout
+  title={title}
+  description={description}
+  path="/beb-castano-primo/"
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.piazza.src} alt={PHOTO.piazza.alt} width={PHOTO.piazza.w} height={PHOTO.piazza.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Nel cuore dell&rsquo;Alto Milanese</span>
+      <h1>B&amp;B a Castano Primo, in provincia di Milano</h1>
+      <p class="lead">
+        Il nostro bed &amp; breakfast si trova a Castano Primo, lungo il fiume
+        Ticino e a due passi dalla stazione: il punto di partenza giusto per
+        Malpensa, Milano e il Parco del Ticino.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Chiama ora: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href="/contatti/">Come raggiungerci</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs
+      items={[{ name: 'B&B a Castano Primo', href: '/beb-castano-primo/' }]}
+    />
+  </div>
+
+  <!-- About the town -->
+  <section class="section" aria-labelledby="paese-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="eyebrow">Il paese</span>
+          <h2 id="paese-title">Castano Primo: tranquillit&agrave; e servizi</h2>
+          <p>
+            Castano Primo &egrave; una cittadina della citt&agrave; metropolitana
+            di Milano, affacciata sul fiume Ticino e circondata dal verde del
+            Parco Lombardo della Valle del Ticino. Qui si respira aria di paese,
+            ma i servizi non mancano: supermercato, bar, ristoranti e piazza
+            sono a pochi minuti a piedi dal B&amp;B.
+          </p>
+          <p>
+            La posizione &egrave; il vero punto di forza: la <strong>stazione
+            ferroviaria di Castano Primo</strong> (linea Saronno&ndash;Novara)
+            &egrave; raggiungibile a piedi in 5 minuti e collega con Milano
+            Cadorna in circa un&rsquo;ora, mentre l&rsquo;aeroporto di Malpensa
+            dista solo 15 km.
+          </p>
+          <ul class="checklist">
+            <li><Icon name="check" /> Stazione ferroviaria a 5 minuti a piedi</li>
+            <li><Icon name="check" /> Conad, bar e ristoranti raggiungibili a piedi</li>
+            <li><Icon name="check" /> Fiume Ticino e aree verdi a due passi</li>
+            <li><Icon name="check" /> A 15 km da Malpensa, a ~30 km da Milano</li>
+          </ul>
+        </div>
+        <figure class="photo photo--portrait">
+          <img src={PHOTO.giardino.src} alt={PHOTO.giardino.alt} width={PHOTO.giardino.w} height={PHOTO.giardino.h} loading="lazy" decoding="async" data-lightbox />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who is it for -->
+  <section class="section section--tint" aria-labelledby="per-chi-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Per chi &egrave; perfetto</span>
+        <h2 id="per-chi-title">Chi sceglie il nostro B&amp;B a Castano Primo</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Viaggiatori in partenza</h3>
+          <p>
+            Chi deve volare da Malpensa e cerca una notte comoda ed economica,
+            con navetta e parcheggio.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>Chi lavora in zona</h3>
+          <p>
+            Professionisti e pendolari che raggiungono Milano in treno o gli
+            stabilimenti dell&rsquo;Alto Milanese.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="bike" size={26} /></span>
+          <h3>Famiglie e ciclisti</h3>
+          <p>
+            Weekend nella natura del Ticino, escursioni lungo il Canale
+            Villoresi e camere spaziose per tutta la famiglia.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Getting here -->
+  <section class="section" aria-labelledby="arrivare-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Come arrivare</span>
+        <h2 id="arrivare-title">Raggiungere Castano Primo</h2>
+        <p class="lead">
+          Sia che arrivi in auto, in treno o in aereo, qui tutto &egrave;
+          semplice.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <span class="card-ico"><Icon name="car" size={26} /></span>
+          <h3>In auto</h3>
+          <p>
+            Da Milano: A8 o A4, uscita <strong>Marcallo-Mesero</strong>, poi in
+            direzione Castano Primo. Parcheggio in struttura.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>In treno</h3>
+          <p>
+            Linea Saronno&ndash;Novara: scendi a <strong>Castano Primo</strong> e
+            raggiungi il B&amp;B a piedi in 5 minuti. Da Milano Cadorna circa
+            un&rsquo;ora.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Da Malpensa</h3>
+          <p>
+            Navetta su richiesta del proprietario o taxi (~20 minuti). Indicaci
+            il volo e ci organizziamo noi.
+          </p>
+        </div>
+      </div>
+      <Gallery photos={[PHOTO.salotto, PHOTO.scalinata, PHOTO.piazza]} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Sei in zona o devi arrivarci?"
+    text="Chiamaci: ti diamo indicazioni precise e verifichiamo subito la disponibilit\u00e0 delle camere."
+  />
+</Layout>

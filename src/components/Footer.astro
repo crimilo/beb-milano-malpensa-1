@@ -1,0 +1,57 @@
+---
+import Logo from './Logo.astro';
+import { NAV, SITE } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="brand" href="/" style="text-decoration: none">
+          <Logo />
+          <span class="brand-name" style="color: #fff"
+            >B&amp;B Milano Malpensa 1<span class="brand-sub">Bed &amp; Breakfast &middot; Castano Primo</span></span
+          >
+        </a>
+        <p style="margin-top: 1rem; max-width: 30rem">
+          Bed &amp; Breakfast a gestione familiare a Castano Primo, a pochi
+          minuti dall&rsquo;aeroporto di Malpensa, con navetta, parcheggio,
+          colazione e la ciclabile del Canale Villoresi a due passi.
+        </p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-title">Il sito</p>
+        <ul>
+          {NAV.map((item) => (
+            <li><a href={item.href}>{item.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-title">Contatti</p>
+        <ul>
+          <li>
+            <a href={SITE.phoneHref}>Tel. {SITE.phoneDisplay}</a>
+          </li>
+          <li><a href={SITE.whatsapp} rel="noopener" target="_blank">WhatsApp</a></li>
+          <li>
+            <a href={SITE.mapsUrl} rel="noopener" target="_blank"
+              >{SITE.address.street}, {SITE.address.zip} {SITE.address.city} ({SITE.address.province})</a
+            >
+          </li>
+          <li>
+            <a href={SITE.bookingUrl} rel="noopener" target="_blank"
+              >Prenota su Booking.com</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">
+      <span>&copy; {new Date().getFullYear()} {SITE.name} &middot; P.IVA non disponibile &middot; {SITE.address.city} ({SITE.address.province})</span>
+      <span
+        ><a href="/sitemap.xml">Sitemap</a> &middot; <a href="/robots.txt">Robots</a> &middot;
+        <a href={SITE.tripadvisorUrl} rel="noopener" target="_blank">Recensioni</a></span
+      >
+    </div>
+  </div>
+</footer>

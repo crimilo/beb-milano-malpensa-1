@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Gallery from '../components/Gallery.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PHOTO } from '../data/site';
+import { lodgingSchema, breadcrumbSchema } from '../data/schema';
+
+const title = 'B&B sul Canale Villoresi \u00b7 ciclabile e natura';
+const description =
+  'B&B sulla pista ciclabile del Canale Villoresi a Castano Primo: bici a disposizione, Ticino a due passi, vicino a Malpensa. Chiama 339 294 6283.';
+const schema = [
+  lodgingSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'B&B sul Canale Villoresi', path: '/beb-canale-villoresi/' },
+  ]),
+].join(',');
+---
+<Layout
+  title={title}
+  description={description}
+  path="/beb-canale-villoresi/"
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.vistaFiumePrimavera.src} alt={PHOTO.vistaFiumePrimavera.alt} width={PHOTO.vistaFiumePrimavera.w} height={PHOTO.vistaFiumePrimavera.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Per ciclisti e amanti della natura</span>
+      <h1>B&amp;B sul Canale Villoresi: ciclabile e natura</h1>
+      <p class="lead">
+        Il nostro B&amp;B &egrave; a Castano Primo, lungo la pista ciclabile del
+        Canale Villoresi: bici a disposizione, spazio per la tua in camera e il
+        Ticino a due passi.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Chiama ora: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href="/camere/">Guarda le camere</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs
+      items={[{ name: 'B&B sul Canale Villoresi', href: '/beb-canale-villoresi/' }]}
+    />
+  </div>
+
+  <!-- The canal -->
+  <section class="section" aria-labelledby="villoresi-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="eyebrow">La ciclabile</span>
+          <h2 id="villoresi-title">Il Canale Villoresi, un percorso pianeggiante</h2>
+          <p>
+            Il Canale Villoresi percorre la Lombardia per circa 86 chilometri,
+            dal Ticino all&rsquo;Adda, e la sua alzaia &egrave; una delle
+            ciclabili pi&ugrave; amate della zona: pianeggiante, ombreggiata e
+            lontana dal traffico. Il B&amp;B &egrave; letteralmente lungo il
+            tracciato: in sella esci e sei gi&agrave; in pista.
+          </p>
+          <p>
+            Un consiglio da chi ci vive: la tratta verso <strong>Turbigo</strong> e
+            <strong>Nosate</strong> regala scorci sul Ticino e qualche salita
+            breve, mentre verso <strong>Bernate Ticino</strong> il percorso
+            &egrave; perfetto per una pedalata tranquilla in famiglia.
+          </p>
+          <ul class="checklist">
+            <li><Icon name="check" /> Bici a disposizione degli ospiti (su richiesta)</li>
+            <li><Icon name="check" /> Possibilit&agrave; di tenere la bici in camera</li>
+            <li><Icon name="check" /> Percorso pianeggiante, adatto a tutti</li>
+            <li><Icon name="check" /> Ticino, parco e natura a due passi</li>
+          </ul>
+        </div>
+        <figure class="photo photo--portrait">
+          <img src={PHOTO.bici.src} alt={PHOTO.bici.alt} width={PHOTO.bici.w} height={PHOTO.bici.h} loading="lazy" decoding="async" data-lightbox />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nature -->
+  <section class="section section--tint" aria-labelledby="natura-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Il Ticino</span>
+        <h2 id="natura-title">Fiume, parco e weekend nella natura</h2>
+        <p class="lead">
+          A pochi minuti dal B&amp;B il fiume Ticino e il Parco Lombardo della
+          Valle del Ticino offrono sentieri, spiaggette e angoli silenziosi:
+          il luogo giusto per staccare dalla citt&agrave;.
+        </p>
+      </div>
+      <Gallery photos={[PHOTO.fiume, PHOTO.vistaFiume, PHOTO.fiumeRiva, PHOTO.fiumePrimavera, PHOTO.fiumePieno, PHOTO.piazza]} />
+    </div>
+  </section>
+
+  <!-- Routes -->
+  <section class="section" aria-labelledby="percorsi-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Idee di gita</span>
+        <h2 id="percorsi-title">Tre gite da fare partendo dal B&amp;B</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <h3>Castano Primo &rarr; Nosate</h3>
+          <p>
+            Lungo il Ticino, tra canneti e boschi: 12 km tranquilli, ideali
+            anche con i bambini.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Castano Primo &rarr; Turbigo</h3>
+          <p>
+            Il borgo con il ponte sul Ticino e le sue centrali storiche:
+            tappa merenda garantita.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Castano Primo &rarr; Bernate Ticino</h3>
+          <p>
+            La tratta pi&ugrave; panoramica del Villoresi in zona, tra
+            chiuse e natura.
+          </p>
+        </div>
+      </div>
+      <p class="lead" style="margin-top: var(--space-3)">
+        Non hai la bici? Chiedici: se disponibile, te la prestiamo volentieri.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Pronto per una pedalata sul Villoresi?"
+    text="Chiamaci per disponibilit\u00e0 e bici: organizziamo il tuo weekend nella natura."
+  />
+</Layout>

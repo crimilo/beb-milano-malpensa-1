@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Gallery from '../components/Gallery.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PHOTO } from '../data/site';
+import { lodgingSchema, breadcrumbSchema, faqSchema } from '../data/schema';
+
+const title = 'B&B vicino a Malpensa con navetta e parcheggio';
+const description =
+  'B&B a 15 km da Malpensa (T1/T2) con navetta su richiesta e parcheggio: dormi prima del volo e parti senza pensieri. Chiama 339 294 6283.';
+const faqs = [
+  {
+    q: 'Quanto dista il B&B dall\u2019aeroporto di Malpensa?',
+    a: 'Il B&B Milano Malpensa 1 si trova a Castano Primo, a circa 15 km dai terminal T1 e T2: in auto sono circa 20 minuti, con navetta su richiesta del proprietario.',
+  },
+  {
+    q: 'Il servizio navetta per Malpensa come funziona?',
+    a: 'Su richiesta organizziamo il trasferimento da e per l\u2019aeroporto, anche per voli all\u2019alba o arrivi in tarda serata. Ti consigliamo di concordarlo al momento della prenotazione: chiama il 339 294 6283.',
+  },
+  {
+    q: 'Posso lasciare l\u2019auto parcheggiata durante il volo?',
+    a: 'Il B&B dispone di parcheggio in struttura. Per il parcheggio durante il viaggio contattaci prima di prenotare: verifichiamo insieme la disponibilit\u00e0 e le condizioni.',
+  },
+  {
+    q: 'Accettate check-in in tarda serata o notturni?',
+    a: 'S\u00ec, siamo abituati a ospiti con voli al mattino presto o arrivi serali. Il check-in flessibile va concordato in anticipo chiamando il 339 294 6283.',
+  },
+];
+const schema = [
+  lodgingSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'B&B vicino a Malpensa', path: '/beb-vicino-aeroporto-malpensa/' },
+  ]),
+  faqSchema(faqs),
+].join(',');
+---
+<Layout
+  title={title}
+  description={description}
+  path="/beb-vicino-aeroporto-malpensa/"
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.fiumePieno.src} alt={PHOTO.fiumePieno.alt} width={PHOTO.fiumePieno.w} height={PHOTO.fiumePieno.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Per chi vola da Malpensa</span>
+      <h1>B&amp;B vicino all&rsquo;aeroporto di Malpensa, con navetta</h1>
+      <p class="lead">
+        Dormi la notte prima del volo a Castano Primo e raggiungi il terminal
+        senza stress: navetta su richiesta, parcheggio in struttura e
+        check-in flessibile, anche all&rsquo;alba.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Chiama ora: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href="/contatti/">Come organizzare la navetta</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs
+      items={[
+        { name: 'B&B vicino a Malpensa', href: '/beb-vicino-aeroporto-malpensa/' },
+      ]}
+    />
+  </div>
+
+  <!-- Why for flyers -->
+  <section class="section" aria-labelledby="perche-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">La soluzione prima del volo</span>
+        <h2 id="perche-title">Perch&eacute; scegliere un B&amp;B vicino a Malpensa</h2>
+        <p class="lead">
+          Voli all&rsquo;alba, scali lunghi, partenze in gruppo: la notte prima
+          del volo si risolve a Castano Primo, a un prezzo ben diverso dagli
+          hotel in aeroporto.
+        </p>
+      </div>
+      <ul class="checklist">
+        <li><Icon name="check" /> <span><strong>Navetta per Malpensa T1/T2</strong> su richiesta: ti veniamo a prendere e ti riaccompagniamo, anche con voli in orari scomodi.</span></li>
+        <li><Icon name="check" /> <span><strong>Parcheggio in struttura</strong>, comodo per chi arriva in auto da lontano e lascia l&rsquo;auto prima di partire.</span></li>
+        <li><Icon name="check" /> <span><strong>Check-in flessibile</strong>: arrivi in tarda serata e parti all&rsquo;alba? Nessun problema, basta avvisarci.</span></li>
+        <li><Icon name="check" /> <span><strong>Camere per famiglie e gruppi</strong>: fino a 4-6 posti letto, ideali anche per comitive in partenza.</span></li>
+        <li><Icon name="check" /> <span><strong>Prezzo onesto</strong>: il comfort di un B&amp;B familiare senza le tariffe degli hotel aeroportuali.</span></li>
+      </ul>
+      <div class="facts">
+        <div class="fact"><strong>15 km</strong><span>da Malpensa T1/T2</span></div>
+        <div class="fact"><strong>~20 min</strong><span>in auto / navetta</span></div>
+        <div class="fact"><strong>24h</strong><span>check-in flessibile su richiesta</span></div>
+        <div class="fact"><strong>6+</strong><span>posti letto per gruppi</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photos -->
+  <section class="section section--tint" aria-labelledby="foto-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="foto-title">Come ti aspettiamo</h2>
+        <p class="lead">
+          Un&rsquo;accoglienza semplice e diretta, come raccontano i nostri
+          ospiti nelle recensioni Google.
+        </p>
+      </div>
+      <Gallery photos={[PHOTO.cartellone, PHOTO.lettoMatrimoniale3, PHOTO.colazione, PHOTO.veranda]} />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Domande frequenti</span>
+        <h2 id="faq-title">Tutto quello che serve sapere prima di partire</h2>
+      </div>
+      <div class="faq">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+      <p class="lead" style="margin-top: var(--space-3)">
+        Altre domande? Chiama il <a href={SITE.phoneHref}><strong>{SITE.phoneDisplay}</strong></a>:
+        ti rispondiamo in italiano e in inglese.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Devi volare da Malpensa?"
+    text="Chiamaci prima di prenotare: verifichiamo insieme navetta, parcheggio e orari, cos\u00ec parti tranquillo."
+  />
+</Layout>

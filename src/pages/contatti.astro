@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PHOTO } from '../data/site';
+import { lodgingSchema, breadcrumbSchema } from '../data/schema';
+
+const title = 'Contatti B&B Milano Malpensa 1 \u00b7 Castano Primo';
+const description =
+  'Telefono 339 294 6283, WhatsApp e indirizzo: Via Lonate Pozzolo 1, 20022 Castano Primo (MI). Come arrivare da Malpensa e da Milano.';
+const schema = [
+  lodgingSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Contatti', path: '/contatti/' },
+  ]),
+].join(',');
+---
+<Layout
+  title={title}
+  description={description}
+  path="/contatti/"
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.struttura.src} alt={PHOTO.struttura.alt} width={PHOTO.struttura.w} height={PHOTO.struttura.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Contattaci</span>
+      <h1>Contatti e come arrivare</h1>
+      <p class="lead">
+        Chiamaci o scrivici su WhatsApp: rispondiamo in italiano e in inglese,
+        con disponibilit&agrave; e indicazioni in pochi minuti.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Chiama: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href={SITE.whatsapp} target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs items={[{ name: 'Contatti', href: '/contatti/' }]} />
+  </div>
+
+  <!-- Contact -->
+  <section class="section" aria-labelledby="contatti-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="eyebrow">Contatti diretti</span>
+          <h2 id="contatti-title">Parliamone al telefono</h2>
+          <ul class="contact-list">
+            <li>
+              <Icon name="phone" />
+              <span>
+                Telefono<br />
+                <a href={SITE.phoneHref}>{SITE.phoneDisplay}</a>
+              </span>
+            </li>
+            <li>
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="#2a7359" aria-hidden="true" style="margin-top:.2rem">
+                <path d="M16.04 4C9.4 4 4 9.38 4 16c0 2.13.57 4.2 1.64 6.03L4 28l6.12-1.6A12.04 12.04 0 0 0 16.04 28C22.68 28 28 22.62 28 16S22.68 4 16.04 4zm0 21.92c-1.9 0-3.76-.52-5.37-1.49l-.39-.23-3.63.95.97-3.54-.25-.39A9.9 9.9 0 0 1 6.1 16c0-5.48 4.46-9.94 9.94-9.94S26 10.52 26 16s-4.46 9.92-9.96 9.92z" />
+              </svg>
+              <span>
+                WhatsApp<br />
+                <a href={SITE.whatsapp} target="_blank" rel="noopener">Scrivici su WhatsApp</a>
+              </span>
+            </li>
+            <li>
+              <Icon name="pin" />
+              <span>
+                Indirizzo<br />
+                <a href={SITE.mapsUrl} target="_blank" rel="noopener"
+                  >{SITE.address.street}, {SITE.address.zip} {SITE.address.city} ({SITE.address.province})</a
+                >
+              </span>
+            </li>
+            <li>
+              <Icon name="clock" />
+              <span>
+                Check-in<br />
+                Flessibile, da concordare (anche in tarda serata)
+              </span>
+            </li>
+          </ul>
+        </div>
+        <figure class="photo photo--portrait">
+          <img src={PHOTO.cartellone.src} alt={PHOTO.cartellone.alt} width={PHOTO.cartellone.w} height={PHOTO.cartellone.h} loading="lazy" decoding="async" data-lightbox />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- How to get here -->
+  <section class="section section--tint" aria-labelledby="arrivare-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Come arrivare</span>
+        <h2 id="arrivare-title">Raggiungici in pochi passi</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Da Malpensa (15 km)</h3>
+          <p>
+            Navetta su richiesta: indicaci orario e terminal e ti veniamo a
+            prendere. In alternativa taxi, circa 20 minuti.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>Da Milano in treno</h3>
+          <p>
+            Da Milano Cadorna, linea Saronno&ndash;Novara: scendi a Castano
+            Primo e cammina 5 minuti fino al B&amp;B.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-ico"><Icon name="car" size={26} /></span>
+          <h3>In auto</h3>
+          <p>
+            Autostrada A8 o A4, uscita Marcallo-Mesero: parcheggio gratuito in
+            struttura.
+          </p>
+        </div>
+      </div>
+      <p style="margin-top: var(--space-3)">
+        <a class="btn btn--line" href={SITE.mapsUrl} target="_blank" rel="noopener"
+          >Apri la posizione in Google Maps</a
+        >
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Ti aspettiamo a Castano Primo"
+    text="Una chiamata e risolviamo tutto: disponibilit\u00e0, navetta, orari di arrivo e ogni tua domanda."
+  />
+</Layout>

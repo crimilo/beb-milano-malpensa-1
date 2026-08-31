@@ -1,0 +1,26 @@
+---
+import Photo from './Photo.astro';
+import type { Photo as PhotoT } from '../data/site';
+
+interface Props {
+  photos: PhotoT[];
+  cols?: 3 | 4;
+  alt?: string[];
+  eagerFirst?: boolean;
+}
+const { photos, cols = 3, alt = [], eagerFirst = false } = Astro.props;
+const gridClass = cols === 4 ? 'gallery gallery--4' : 'gallery';
+---
+<div class={gridClass}>
+  {
+    photos.map((p, i) => (
+      <figure class="photo">
+        <Photo
+          photo={p}
+          alt={alt[i] ?? p.alt}
+          eager={eagerFirst && i === 0}
+        />
+      </figure>
+    ))
+  }
+</div>

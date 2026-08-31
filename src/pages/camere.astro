@@ -1,0 +1,165 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Gallery from '../components/Gallery.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PHOTO } from '../data/site';
+import { lodgingSchema, breadcrumbSchema } from '../data/schema';
+
+const title = 'Camere B&B Milano Malpensa 1 \u00b7 Castano Primo';
+const description =
+  'Camere con bagno privato, TV, Wi-Fi e aria condizionata: singole, matrimoniali, triple e quadruple con letto a castello. Chiama 339 294 6283.';
+const schema = [
+  lodgingSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Camere', path: '/camere/' },
+  ]),
+].join(',');
+---
+<Layout
+  title={title}
+  description={description}
+  path="/camere/"
+  schema={`[${schema}]`}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.salotto.src} alt={PHOTO.salotto.alt} width={PHOTO.salotto.w} height={PHOTO.salotto.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Le nostre camere</span>
+      <h1>Camere semplici, pulite e confortevoli</h1>
+      <p class="lead">
+        Tutte le camere hanno bagno privato, TV, Wi-Fi gratuito e aria
+        condizionata. Dalla matrimoniale alla quadrupla con letto a castello:
+        c&rsquo;&egrave; la soluzione giusta per ogni viaggio.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Chiama per disponibilit&agrave;</a>
+        <a class="btn btn--ghost" href="/contatti/">Contatti e come arrivare</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <Breadcrumbs items={[{ name: 'Camere', href: '/camere/' }]} />
+  </div>
+
+  <!-- Room types -->
+  <section class="section" aria-labelledby="tipologie-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Le tipologie</span>
+        <h2 id="tipologie-title">Quale camera fa per te?</h2>
+        <p class="lead">
+          Ogni camera &egrave; arredata in modo semplice ma curato, con
+          biancheria, asciugamani e tutto il necessario per il tuo soggiorno.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <h3>Camera matrimoniale</h3>
+          <p>
+            Letto matrimoniale, bagno privato, TV, Wi-Fi e aria condizionata:
+            l&rsquo;ideale per coppie in viaggio.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Camera con letti singoli</h3>
+          <p>
+            Due letti singoli, perfetta per amici o colleghi che viaggiano
+            insieme.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Camera famiglia / gruppo</h3>
+          <p>
+            Fino a 4-6 posti: matrimoniale, letti singoli e letto a castello
+            per famiglie e comitive.
+          </p>
+        </div>
+      </div>
+      <p class="lead" style="margin-top: var(--space-3)">
+        I prezzi sono contenuti e variano in base alla stagione e alla durata:
+        chiamaci al <a href={SITE.phoneHref}><strong>{SITE.phoneDisplay}</strong></a> per
+        disponibilit&agrave; e tariffe.
+      </p>
+    </div>
+  </section>
+
+  <!-- Gallery rooms -->
+  <section class="section section--tint" aria-labelledby="foto-camere-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="foto-camere-title">Le camere in foto</h2>
+        <p class="lead">Tocca le foto per vederle a schermo intero.</p>
+      </div>
+      <Gallery
+        cols={4}
+        eagerFirst
+        photos={[
+          PHOTO.lettoMatrimoniale,
+          PHOTO.lettoMatrimoniale3,
+          PHOTO.lettoSingoli,
+          PHOTO.dueLettiSingoli,
+          PHOTO.quattroLetti,
+          PHOTO.castelloSingolo,
+          PHOTO.castello2,
+          PHOTO.lettoCastello,
+          PHOTO.castelloBasso,
+          PHOTO.matrimonialeSingolo,
+          PHOTO.tv,
+          PHOTO.salotto,
+        ]}
+      />
+    </div>
+  </section>
+
+  <!-- Bathrooms -->
+  <section class="section" aria-labelledby="bagni-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">I bagni privati</span>
+        <h2 id="bagni-title">Bagno privato in ogni camera</h2>
+        <p class="lead">
+          Niente bagni in comune: ogni camera ha il suo, con doccia e
+          sanitari.
+        </p>
+      </div>
+      <Gallery photos={[PHOTO.bagno5, PHOTO.bagno3, PHOTO.bagno7, PHOTO.bagno9]} />
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section section--tint" aria-labelledby="servizi-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <span class="eyebrow">I servizi inclusi</span>
+          <h2 id="servizi-title">Tutto quello che serve, senza sorprese</h2>
+          <ul class="checklist">
+            <li><Icon name="check" /> Colazione: caff&egrave;, croissant e dolci</li>
+            <li><Icon name="check" /> Wi-Fi gratuito in tutta la struttura</li>
+            <li><Icon name="check" /> Aria condizionata</li>
+            <li><Icon name="check" /> TV in camera</li>
+            <li><Icon name="check" /> Parcheggio in struttura</li>
+            <li><Icon name="check" /> Animali ammessi (da concordare)</li>
+            <li><Icon name="check" /> Navetta per Malpensa su richiesta</li>
+            <li><Icon name="check" /> Bici a disposizione degli ospiti</li>
+          </ul>
+        </div>
+        <figure class="photo photo--portrait">
+          <img src={PHOTO.colazione.src} alt={PHOTO.colazione.alt} width={PHOTO.colazione.w} height={PHOTO.colazione.h} loading="lazy" decoding="async" data-lightbox />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Trovi la camera giusta per il tuo viaggio?"
+    text="Chiamaci o scrivici su WhatsApp: ti confermiamo disponibilit\u00e0, prezzo e servizi in pochi minuti."
+  />
+</Layout>

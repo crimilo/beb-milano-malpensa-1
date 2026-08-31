@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Gallery from '../components/Gallery.astro';
+import Reviews from '../components/Reviews.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, PHOTO } from '../data/site';
+import { lodgingSchema, websiteSchema, breadcrumbSchema } from '../data/schema';
+
+const title = 'B&B Milano Malpensa 1 \u00b7 Bed & Breakfast a Castano Primo';
+const description =
+  'B&B economico a Castano Primo, a 15 km da Malpensa: navetta aeroporto, parcheggio, camere con bagno privato e colazione. Chiama 339 294 6283.';
+const schema = [lodgingSchema(), websiteSchema(), breadcrumbSchema([{ name: 'Home', path: '/' }])].join(',');
+---
+<Layout title={title} description={description} path="/" schema={`[${schema}]`}>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src={PHOTO.struttura.src} alt={PHOTO.struttura.alt} width={PHOTO.struttura.w} height={PHOTO.struttura.h} fetchpriority="high" />
+    </div>
+    <div class="container hero-content">
+      <span class="hero-kicker">Benvenuti al B&amp;B Milano Malpensa 1</span>
+      <h1>Dormi bene, parti sereno: bed &amp; breakfast a Castano Primo</h1>
+      <p class="lead">
+        A 15 km dall&rsquo;aeroporto di Malpensa, con navetta e parcheggio,
+        camere con bagno privato, colazione e la ciclabile del Canale Villoresi
+        a due passi. Gestione familiare, italiano e inglese.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--accent" href={SITE.phoneHref}>Chiama ora: {SITE.phoneDisplay}</a>
+        <a class="btn btn--ghost" href="/beb-vicino-aeroporto-malpensa/">Navetta per Malpensa</a>
+        <a class="btn btn--ghost" href="/camere/">Le nostre camere</a>
+      </div>
+      <div class="hero-meta">
+        <span><strong>15 km</strong> dall&rsquo;aeroporto</span>
+        <span><strong>5 min</strong> a piedi dalla stazione</span>
+        <span><strong>176</strong> recensioni su Google</span>
+        <span><strong>Bici</strong> e ciclabile a due passi</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why us -->
+  <section class="section" aria-labelledby="perche-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Perch&eacute; sceglierci</span>
+        <h2 id="perche-title">Un B&amp;B pensato per chi viaggia</h2>
+        <p class="lead">
+          Siamo a Castano Primo, nel cuore dell&rsquo;Alto Milanese: comodi per
+          l&rsquo;aeroporto, per Milano e per il Parco del Ticino.
+        </p>
+      </div>
+      <div class="grid grid--2">
+        <a class="card" href="/beb-vicino-aeroporto-malpensa/">
+          <span class="card-ico"><Icon name="plane" size={26} /></span>
+          <h3>Navetta per Malpensa</h3>
+          <p>
+            Ritiro e accompagnamento in aeroporto su richiesta: perfetto per
+            voli all&rsquo;alba, attese e scali. Parcheggio in struttura.
+          </p>
+        </a>
+        <a class="card" href="/beb-castano-primo/">
+          <span class="card-ico"><Icon name="train" size={26} /></span>
+          <h3>A due passi dalla stazione</h3>
+          <p>
+            La stazione di Castano Primo &egrave; raggiungibile a piedi:
+            Milano Cadorna in circa un&rsquo;ora di treno, senza auto.
+          </p>
+        </a>
+        <a class="card" href="/beb-canale-villoresi/">
+          <span class="card-ico"><Icon name="bike" size={26} /></span>
+          <h3>Sul Canale Villoresi</h3>
+          <p>
+            La pista ciclabile del Villoresi passa davanti al B&amp;B: bici a
+            disposizione e spazio per la tua in camera.
+          </p>
+        </a>
+        <a class="card" href="/camere/">
+          <span class="card-ico"><Icon name="home" size={26} /></span>
+          <h3>Camere per famiglie e gruppi</h3>
+          <p>
+            Dalla matrimoniale alla quadrupla con letto a castello: bagno
+            privato, TV, Wi-Fi e aria condizionata.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms preview -->
+  <section class="section section--tint" aria-labelledby="camere-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Le camere</span>
+        <h2 id="camere-title">Camere semplici, pulite e confortevoli</h2>
+        <p class="lead">
+          Ogni camera ha bagno privato, TV, Wi-Fi gratuito e aria condizionata.
+          Scegli la soluzione giusta per te, per la famiglia o per il gruppo.
+        </p>
+      </div>
+      <Gallery
+        photos={[PHOTO.lettoMatrimoniale, PHOTO.castelloSingolo, PHOTO.quattroLetti, PHOTO.bagno5]}
+        eagerFirst
+      />
+      <p style="margin-top: var(--space-3)">
+        <a class="btn btn--line" href="/camere/">Scopri tutte le camere</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- The area -->
+  <section class="section" aria-labelledby="zona-title">
+    <div class="container">
+      <div class="split">
+        <figure class="photo photo--wide">
+          <img src={PHOTO.vistaFiume.src} alt={PHOTO.vistaFiume.alt} width={PHOTO.vistaFiume.w} height={PHOTO.vistaFiume.h} loading="lazy" decoding="async" data-lightbox />
+        </figure>
+        <div>
+          <span class="eyebrow">La nostra zona</span>
+          <h2 id="zona-title">Tra Malpensa, Milano e il Ticino</h2>
+          <p>
+            Il B&amp;B si trova a Castano Primo, lungo il fiume Ticino e a pochi
+            chilometri dall&rsquo;aeroporto di Malpensa (T1 e T2). Una posizione
+            unica: la tranquillit&agrave; della natura e la comodit&agrave; di
+            raggiungere Milano, il Lago Maggiore e la Valtellina.
+          </p>
+          <ul class="checklist">
+            <li><Icon name="check" /> Navetta per l&rsquo;aeroporto di Malpensa su richiesta</li>
+            <li><Icon name="check" /> Stazione di Castano Primo a 5 minuti a piedi</li>
+            <li><Icon name="check" /> Pista ciclabile del Canale Villoresi davanti alla porta</li>
+            <li><Icon name="check" /> Fiume Ticino e Parco Lombardo della Valle del Ticino</li>
+          </ul>
+          <p style="margin-top: var(--space-3)">
+            <a class="btn btn--line" href="/contatti/">Come arrivare</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+  <CtaBand
+    title="Pronto a prenotare il tuo soggiorno?"
+    text="Chiamaci o scrivici su WhatsApp: ti rispondiamo subito con disponibilit\u00e0, tariffe e servizio navetta."
+  />
+</Layout>

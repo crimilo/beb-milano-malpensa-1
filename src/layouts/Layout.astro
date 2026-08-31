@@ -1,0 +1,129 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  schema?: string;
+  ogImage?: string;
+  bodyClass?: string;
+}
+
+const { title, description, path, schema, ogImage = '/og.jpg', bodyClass = '' } =
+  Astro.props;
+const canonical = SITE.url + path;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={SITE.url + ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="it_IT" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={SITE.url + ogImage} />
+
+    <meta name="theme-color" content="#1e5b47" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    {schema && <script type="application/ld+json" set:html={schema} />}
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">Vai al contenuto</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Lightbox (tap to zoom / de-zoom, dark backdrop) -->
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Immagine ingrandita">
+      <button id="lightbox-close" class="lightbox-close" aria-label="Chiudi">&#10005;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <p class="lightbox-hint">Tocca l&rsquo;immagine per ingrandire o ridurre</p>
+    </div>
+
+    <WhatsAppButton />
+
+    <script is:inline>
+      (function () {
+        var lb = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lightbox-img');
+        var lbClose = document.getElementById('lightbox-close');
+        var lbHint = document.querySelector('.lightbox-hint');
+
+        function openLb(src, alt) {
+          lbImg.src = src;
+          lbImg.alt = alt || '';
+          lbImg.classList.remove('is-zoomed');
+          if (lbHint) lbHint.style.display = 'block';
+          lb.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        }
+        function closeLb() {
+          lb.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+        document.querySelectorAll('[data-lightbox]').forEach(function (img) {
+          img.addEventListener('click', function () {
+            openLb(img.currentSrc || img.src, img.alt);
+          });
+        });
+        // tap on the image toggles zoom / de-zoom
+        lbImg.addEventListener('click', function () {
+          lbImg.classList.toggle('is-zoomed');
+          if (lbHint) lbHint.style.display = lbImg.classList.contains('is-zoomed') ? 'none' : 'block';
+        });
+        lbClose.addEventListener('click', closeLb);
+        lb.addEventListener('click', function (e) {
+          if (e.target === lb) closeLb();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeLb();
+        });
+
+        // mobile nav toggle
+        var toggle = document.getElementById('nav-toggle');
+        var nav = document.getElementById('nav');
+        if (toggle && nav) {
+          toggle.addEventListener('click', function () {
+            var open = nav.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+          nav.addEventListener('click', function (e) {
+            if (e.target.closest('a')) {
+              nav.classList.remove('is-open');
+              toggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
