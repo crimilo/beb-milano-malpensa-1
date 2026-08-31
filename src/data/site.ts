@@ -23,7 +23,6 @@ export const SITE = {
   email: '', // no public email available; contact via phone / WhatsApp
   mapsUrl:
     'https://www.google.com/maps/place/Bed%26Breakfast+Milano+Malpensa+1/@45.5545398,8.7755763,17z/data=!4m10!3m9!1s0x4786f53a4bbdda75:0x41f8691062bb5953!5m3!1s2026-09-01!4m1!1i2!8m2!3d45.5545398!4d8.7755763!16s%2Fg%2F11r96nq8q',
-  bookingUrl: 'https://www.booking.com/hotel/it/bed-amp-breakfast-milano-malpensa.it.html',
   tripadvisorUrl:
     'https://www.tripadvisor.com/Hotel_Review-g3642464-d8367249-Reviews-B_b_Milano_Malpensa_1-Castano_Primo_Province_of_Milan_Lombardy.html',
   rating: { value: 3.7, count: 176 }, // Google
@@ -62,7 +61,7 @@ export const I18N = {
         'Bed & Breakfast a gestione familiare a Castano Primo, a pochi minuti dall\u2019aeroporto di Malpensa: navetta, parcheggio, colazione e camere comode per chi viaggia per lavoro.',
       sitemapTitle: 'Il sito',
       contactTitle: 'Contatti',
-      book: 'Prenota su Booking.com',
+      book: 'Prenota direttamente (WhatsApp)',
       note: 'P.IVA non disponibile',
       sitemap: 'Sitemap',
       robots: 'Robots',
@@ -92,7 +91,7 @@ export const I18N = {
         'Family-run Bed & Breakfast in Castano Primo, a few minutes from Milan Malpensa airport: shuttle, parking, breakfast and comfortable rooms for business travellers.',
       sitemapTitle: 'Site',
       contactTitle: 'Contact',
-      book: 'Book on Booking.com',
+      book: 'Book directly (WhatsApp)',
       note: 'VAT ID not available',
       sitemap: 'Sitemap',
       robots: 'Robots',

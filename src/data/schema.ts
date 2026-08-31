@@ -47,7 +47,7 @@ export function lodgingSchema(lang: Locale): string {
       { '@type': 'LocationFeatureSpecification', name: 'Air conditioning', value: true },
       { '@type': 'LocationFeatureSpecification', name: 'Pets allowed', value: true },
     ],
-    sameAs: [SITE.bookingUrl, SITE.tripadvisorUrl, SITE.mapsUrl],
+    sameAs: [SITE.tripadvisorUrl, SITE.mapsUrl],
     knowsLanguage: ['it', 'en'],
   };
   return JSON.stringify(s);
