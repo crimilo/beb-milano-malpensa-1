@@ -35,6 +35,9 @@
   --radius-sm: 10px;
   --shadow: 0 10px 30px rgba(14, 36, 28, 0.12);
   --header-h: 4.25rem;
+  --banner-h: 2.75rem;
+  /* how much the banner pushes the header down (0 when hidden/closed) */
+  --banner-offset: 0px;
 }
 
 /* ---------- fonts (subset WOFF2, inlined: no swap CLS) ---------- */
@@ -219,15 +222,77 @@ strong { font-weight: 600; }
   gap: var(--space-2);
 }
 
+/* ---------- top promo banner ---------- */
+body.banner-shown {
+  --banner-offset: var(--banner-h);
+}
+.top-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 80;
+  min-height: var(--banner-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 3.25rem;
+  background: var(--green-900);
+  color: var(--cream);
+  font-size: clamp(0.78rem, 2.6vw, 0.95rem);
+  line-height: 1.35;
+  text-align: center;
+  border-bottom: 1px solid var(--line-soft);
+  box-shadow: 0 2px 12px rgba(14, 36, 28, 0.14);
+  transition: transform 0.28s ease;
+}
+.top-banner.is-hidden {
+  transform: translateY(-100%);
+}
+.top-banner.is-closed {
+  display: none;
+}
+.top-banner p {
+  margin: 0;
+}
+.top-banner strong {
+  color: var(--amber);
+  font-weight: 700;
+}
+.top-banner-close {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(251, 247, 240, 0.72);
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.top-banner-close:hover {
+  color: #fff;
+  background: rgba(251, 247, 240, 0.14);
+}
+
 /* ---------- header ---------- */
 .site-header {
   position: fixed;
-  inset: 0 0 auto 0;
+  left: 0;
+  right: 0;
+  top: var(--banner-offset);
   z-index: 50;
   height: var(--header-h);
   background: rgba(251, 247, 240, 0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
+  transition: top 0.28s ease;
 }
 .header-inner {
   height: var(--header-h);
@@ -365,7 +430,7 @@ strong { font-weight: 600; }
 @media (max-width: 1080px) {
   .nav {
     position: fixed;
-    inset: var(--header-h) 0 auto 0;
+    inset: calc(var(--header-h) + var(--banner-offset)) 0 auto 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0.25rem;
@@ -384,7 +449,7 @@ strong { font-weight: 600; }
 .hero {
   position: relative;
   color: #fff;
-  padding: calc(var(--header-h) + var(--space-5)) 0 var(--space-6);
+  padding: calc(var(--header-h) + var(--banner-offset) + var(--space-5)) 0 var(--space-6);
   background-color: var(--green-900);
   overflow: hidden;
 }

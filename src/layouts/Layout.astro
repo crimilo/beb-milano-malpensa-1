@@ -63,8 +63,31 @@ const htmlLang = I18N[lang].langLabel;
 
     {schema && <script type="application/ld+json" set:html={schema} />}
   </head>
-  <body>
+  <body class="banner-shown">
     <a class="skip-link" href="#main">{lang === 'it' ? 'Vai al contenuto' : 'Skip to content'}</a>
+
+    <!-- Top promo banner: hidden on scroll, closed with X, back on scroll-to-top -->
+    <div
+      id="top-banner"
+      class="top-banner"
+      role="region"
+      aria-label={lang === 'it' ? 'Promozione' : 'Promotion'}
+    >
+      <p>
+        {lang === 'it' ? (
+          <>Prenota direttamente e risparmia il <strong>10%</strong> rispetto a Booking.</>
+        ) : (
+          <>Book directly and save <strong>10%</strong> compared to Booking.</>
+        )}
+      </p>
+      <button
+        id="top-banner-close"
+        class="top-banner-close"
+        aria-label={lang === 'it' ? 'Chiudi' : 'Close'}
+        >&#10005;</button
+      >
+    </div>
+
     <Header lang={lang} pageKey={pageKey} />
     <main id="main">
       <slot />
@@ -130,6 +153,29 @@ const htmlLang = I18N[lang].langLabel;
               nav.classList.remove('is-open');
               toggle.setAttribute('aria-expanded', 'false');
             }
+          });
+        }
+
+        // Top promo banner: hidden on scroll, closed with X, back on scroll-to-top.
+        var banner = document.getElementById('top-banner');
+        var bannerClose = document.getElementById('top-banner-close');
+        if (banner && bannerClose) {
+          var bannerClosed = false;
+          function syncBanner() {
+            if (bannerClosed) return;
+            var h = banner.offsetHeight || 44;
+            document.body.style.setProperty('--banner-h', h + 'px');
+            var atTop = (window.scrollY || window.pageYOffset) < 12;
+            banner.classList.toggle('is-hidden', !atTop);
+            document.body.classList.toggle('banner-shown', atTop);
+          }
+          window.addEventListener('scroll', syncBanner, { passive: true });
+          window.addEventListener('resize', syncBanner);
+          syncBanner();
+          bannerClose.addEventListener('click', function () {
+            bannerClosed = true;
+            banner.classList.add('is-closed');
+            document.body.classList.remove('banner-shown');
           });
         }
       })();
